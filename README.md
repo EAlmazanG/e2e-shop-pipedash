@@ -55,8 +55,6 @@ e2eShop-pipeDash/
 │   ├── etl_prototype.ipynb     # Prototype of ETL process and testing
 │
 ├── README.md                   # Documentation and project overview
-├── setup_guide.md              # Setup and configuration instructions
-├── architecture.md             # Architecture and project structure description
 ├── requirements.txt            # Dependencies
 ├── environment.yml             # Conda environment configuration (optional)
 └── .gitignore                  # Excludes unnecessary files from version control
