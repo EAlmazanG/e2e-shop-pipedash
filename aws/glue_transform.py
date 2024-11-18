@@ -1,6 +1,6 @@
 import hashlib
 from pyspark.sql import SparkSession
-from pyspark.sql.functions import col, lit, expr, dayofweek, when, date_format
+from pyspark.sql.functions import col, lit, expr, dayofweek, when, date_format, to_date
 from pyspark.sql.types import IntegerType, DateType, StringType, BooleanType, StructType, StructField
 
 ### additional functions
@@ -36,7 +36,6 @@ def create_dim_item_family(input_path, spark, s3_bucket_name, output_path="clean
     
     print(f"dim_item_family saved successfully to {full_output_path}")
 
-
 date_start = "2009-01-01"
 date_end = "2025-12-31"
 
@@ -59,7 +58,6 @@ def create_dim_date(date_start, date_end, spark, s3_bucket_name, output_path="cl
     dim_date.write.mode("overwrite").parquet(full_output_path)
     
     print(f"dim_date saved successfully to {full_output_path}")
-
 
 country_data = {
     'country_id': [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 
@@ -224,3 +222,64 @@ def create_dim_location(country_data, spark, s3_bucket_name, output_path = "clea
     dim_location.write.mode("overwrite").parquet(full_output_path)
 
     print(f"dim_location saved successfully to {full_output_path}")
+
+def create_fact_transactions(input_path, dim_date_path, dim_location_path, spark, s3_bucket_name, output_path="clean"):
+    # load raw_retail data
+    full_input_path = f"s3://{s3_bucket_name}/{input_path}"
+    raw_retail = spark.read.csv(full_input_path, header=True, inferSchema=True)
+    
+    # rename columns to match schema
+    transactions = raw_retail.selectExpr(
+        "InvoiceNo as invoice_id",
+        "StockCode as item_id",
+        "Description as item_description",
+        "cast(Quantity as int) as quantity_amount",
+        "to_timestamp(InvoiceDate, 'yyyy-MM-dd HH:mm:ss') as event_timestamp_invoiced_at",
+        "cast(UnitPrice as float) as unit_price_eur",
+        "cast(CustomerID as int) as customer_id",
+        "Country as country_name"
+    ).withColumn("transaction_id", expr("monotonically_increasing_id()")) \
+     .withColumn("item_uuid", expr("sha2(concat_ws('_', item_id, item_description), 256)"))
+    
+    # load dim_date and dim_location for mapping
+    full_dim_date_path = f"s3://{s3_bucket_name}/{dim_date_path}"
+    full_dim_location_path = f"s3://{s3_bucket_name}/{dim_location_path}"
+
+    dim_date = spark.read.parquet(full_dim_date_path)
+    dim_location = spark.read.parquet(full_dim_location_path)
+
+    # join transactions with dim_date
+    fact_transactions = transactions.withColumn("transaction_date_id", to_date(col("event_timestamp_invoiced_at"))) \
+        .join(dim_date.select("date_id", "date"), col("transaction_date_id") == col("date"), "left") \
+        .withColumnRenamed("date_id", "transaction_date_id") \
+        .drop("date")
+    
+    # join transactions with dim_location
+    fact_transactions = fact_transactions.join(
+        dim_location.select("country_id", "country_name"),
+        "country_name",
+        "left"
+    )
+    
+    # calculate total_price_eur and reorder columns
+    fact_transactions = fact_transactions.withColumn(
+        "total_price_eur",
+        col("quantity_amount") * col("unit_price_eur")
+    ).select(
+        "transaction_id",
+        "invoice_id",
+        "event_timestamp_invoiced_at",
+        "transaction_date_id",
+        "item_uuid",
+        "item_id",
+        "quantity_amount",
+        "unit_price_eur",
+        "total_price_eur",
+        "customer_id",
+        "country_id"
+    )
+
+    full_output_path = f"s3://{s3_bucket_name}/{output_path}/fact_transactions/"
+    fact_transactions.write.mode("overwrite").parquet(full_output_path)
+    
+    print(f"fact_transactions saved successfully to {full_output_path}")
