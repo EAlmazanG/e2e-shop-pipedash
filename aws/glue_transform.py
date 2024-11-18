@@ -1,51 +1,66 @@
+import hashlib
+from pyspark.sql import SparkSession
+from pyspark.sql.functions import col, lit, expr, dayofweek, when, date_format
+from pyspark.sql.types import IntegerType, DateType, StringType, BooleanType, StructType, StructField
 
-import pandas as pd
-import numpy as np
-from collections import Counter
-
-import os
-import sys
-sys.path.append(os.path.abspath(os.path.join('..')))
-
-
-def generate_hash(row, columns):
-    combined_string = "_".join(str(row[col]) for col in columns)
+### additional functions
+def generate_hash(*cols):
+    combined_string = "_".join(map(str, cols))
     return hashlib.md5(combined_string.encode()).hexdigest()
 
+### paths
+s3_bucket_name = "e2e-shop-bucket"
+input_path_raw_main_product_descriptions = "raw/main_product_descriptions.csv"
+input_path_retail = "raw/retail.csv"
+output_clean = "clean/"
 
-from s3 bucket
-
-raw_data = pd.read_csv('../raw/retail.csv', encoding='ISO-8859-1')
-raw_product_descriptions = pd.read_csv('../raw/main_product_descriptions.csv')
-
-### dim_item_family
-item_family = raw_product_descriptions.copy()
-item_family = item_family.rename(columns={
-    'item_family': 'item_family_id',
-    'category': 'item_category'
-})
-
-item_family['item_family_id'] = item_family['item_family_id'].astype('Int64')
-item_family['item_family_description'] = item_family['item_family_description'].astype(str)
-item_family['item_category'] = item_family['item_category'].astype(str)
-
-dim_item_family = item_family.copy()
+### initialize spark session
+spark = SparkSession.builder.appName("pyspark-e2e-shop-session").getOrCreate()
 
 
-### dim_date
-date_range = pd.date_range(start='2009-01-01', end='2025-12-31', freq='D')
+### table transformations
+def create_dim_item_family(input_path, spark, s3_bucket_name, output_path="clean"):
+    # read csv source from s3
+    full_input_path = f"s3://{s3_bucket_name}/{input_path}"
+    raw_main_product_descriptions = spark.read.option("header", True).csv(full_input_path)
 
-dim_date = pd.DataFrame({
-    'date_id': range(1, len(date_range) + 1),
-    'date': date_range.date,
-    'year': date_range.year,
-    'month': date_range.month,
-    'day': date_range.day,
-    'day_of_week': date_range.strftime('%A'),
-    'is_weekend': date_range.weekday >= 5 
-})
+    # create dim_item_family
+    dim_item_family = raw_main_product_descriptions.select(
+        col("item_family").alias("item_family_id").cast(IntegerType()),
+        col("item_family_description").cast(StringType()),
+        col("category").alias("item_category").cast(StringType())
+    ).drop_duplicates()
 
-### dim_location
+    full_output_path = f"s3://{s3_bucket_name}/{output_path}/dim_item_family/"
+    dim_item_family.write.mode("overwrite").parquet(full_output_path)
+    
+    print(f"dim_item_family saved successfully to {full_output_path}")
+
+
+date_start = "2009-01-01"
+date_end = "2025-12-31"
+
+def create_dim_date(date_start, date_end, spark, s3_bucket_name, output_path="clean"):
+    # generate date range using Spark SQL
+    date_range = spark.sql(f"""
+        SELECT 
+            sequence(to_date('{date_start}'), to_date('{date_end}'), interval 1 day) as dates
+    """).selectExpr("explode(dates) as date")
+    
+    # create dim_date
+    dim_date = date_range.withColumn("date_id", expr("row_number() over (order by date)")) \
+        .withColumn("year", expr("year(date)").cast(IntegerType())) \
+        .withColumn("month", expr("month(date)").cast(IntegerType())) \
+        .withColumn("day", expr("day(date)").cast(IntegerType())) \
+        .withColumn("day_of_week", date_format(col("date"), "EEEE").cast(StringType())) \
+        .withColumn("is_weekend", when(dayofweek(col("date")).isin(1, 7), lit(True)).otherwise(lit(False)).cast(BooleanType()))
+    
+    full_output_path = f"s3://{s3_bucket_name}/{output_path}/dim_date/"
+    dim_date.write.mode("overwrite").parquet(full_output_path)
+    
+    print(f"dim_date saved successfully to {full_output_path}")
+
+
 country_data = {
     'country_id': [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 
                    21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 
@@ -184,183 +199,28 @@ country_data = {
                           'WALLIS AND FUTUNA', 'WESTERN SAHARA', 'YEMEN', 'ZAMBIA', 'ZIMBABWE',
                           'EIRE','CHANNEL ISLANDS', 'UNSPECIFIED', 'EU', 'RSA'],
 }
-dim_location = pd.DataFrame(country_data)
 
-dim_location['country_id'] = dim_location['country_id'].astype('Int64')
-dim_location['iso_country_code'] = dim_location['iso_country_code'].astype(str)
-dim_location['country_name'] = dim_location['country_name'].astype(str)
-dim_location['country_code_name'] = dim_location['country_code_name'].astype(str)
+def create_dim_location(country_data, spark, s3_bucket_name, output_path = "clean"):
+    # country dict to list of tuples
+    country_data_tuples = list(zip(
+        country_data['country_id'], 
+        country_data['iso_country_code'], 
+        country_data['country_name'], 
+        country_data['country_code_name']
+    ))
 
-dim_location = dim_location[['country_id','iso_country_code', 'country_name', 'country_code_name']]
+    # schema
+    schema = StructType([
+        StructField("country_id", IntegerType(), True),
+        StructField("iso_country_code", StringType(), True),
+        StructField("country_name", StringType(), True),
+        StructField("country_code_name", StringType(), True)
+    ])
 
+    # create_dim_location
+    dim_location = spark.createDataFrame(country_data_tuples, schema=schema)
 
-### fact_transactions
+    full_output_path = f"s3://{s3_bucket_name}/{output_path}/dim_location/"
+    dim_location.write.mode("overwrite").parquet(full_output_path)
 
-transactions = raw_data.copy()
-
-transactions = transactions.rename(columns={
-    'InvoiceNo': 'invoice_id',
-    'StockCode': 'item_id',
-    'Description': 'item_description',
-    'Quantity': 'quantity_amount',
-    'InvoiceDate': 'event_timestamp_invoiced_at',
-    'UnitPrice': 'unit_price_eur',
-    'CustomerID': 'customer_id',
-    'Country': 'country_name'
-})
-
-transactions['invoice_id'] = transactions['invoice_id'].astype(str)
-transactions['item_id'] = transactions['item_id'].astype(str)
-transactions['item_description'] = transactions['item_description'].astype(str)
-transactions['quantity_amount'] = transactions['quantity_amount'].astype(int)
-transactions['event_timestamp_invoiced_at'] = pd.to_datetime(transactions['event_timestamp_invoiced_at'])
-transactions['unit_price_eur'] = transactions['unit_price_eur'].astype(float)
-transactions['customer_id'] = transactions['customer_id'].astype('Int64')
-transactions['country_name'] = transactions['country_name'].astype(str)
-transactions.index.name = 'transaction_id'
-transactions.reset_index(inplace=True)
-transactions['transaction_id'] = transactions['transaction_id'].astype('Int64')
-transactions['item_uuid'] = transactions.apply(lambda row: generate_hash(row, ['item_id', 'item_description']), axis=1)
-
-fact_transactions = transactions.copy()
-fact_transactions['transaction_date_id'] = fact_transactions['event_timestamp_invoiced_at'].dt.date.map(
-    dim_date.set_index('date')['date_id']
-)
-fact_transactions['country_id'] = fact_transactions['country_name'].map(
-    dim_location.set_index('country_name')['country_id']
-)
-fact_transactions['date'] = fact_transactions['event_timestamp_invoiced_at'].dt.date
-fact_transactions['date_id'] = fact_transactions['date'].map(
-    dim_date.set_index('date')['date_id']
-)
-fact_transactions['total_price_eur'] = fact_transactions['quantity_amount'] * fact_transactions['unit_price_eur']
-fact_transactions = fact_transactions[['transaction_id', 'invoice_id', 'event_timestamp_invoiced_at', 'date_id', 'item_uuid', 'item_id', 'transaction_date_id',
-                                       'quantity_amount', 'unit_price_eur', 'total_price_eur', 'customer_id', 
-                                       'country_id']]
-
-### dim_customers
-from faker import Faker
-import random
-import pandas as pd
-
-customers = transactions[['customer_id', 'country_name']].drop_duplicates().dropna().reset_index(drop=True)
-
-faker = Faker()
-countries_locale = {
-    "Australia": 'en_AU', "Austria": 'de_AT', "Bahrain": 'en_US', "Belgium": 'fr_BE',
-    "Brazil": 'pt_BR', "Canada": 'en_CA', "Channel Islands": 'en_GB', "Cyprus": 'el_CY',
-    "Czech Republic": 'cs_CZ', "Denmark": 'da_DK', "EIRE": 'en_IE', "European Community": 'en_US',
-    "Finland": 'fi_FI', "France": 'fr_FR', "Germany": 'de_DE', "Greece": 'el_GR',
-    "Iceland": 'en_US', "Israel": 'he_IL', "Italy": 'it_IT', "Japan": 'ja_JP',
-    "Lebanon": 'ar_SA', "Lithuania": 'lt_LT', "Malta": 'mt_MT', "Netherlands": 'nl_NL',
-    "Norway": 'no_NO', "Poland": 'pl_PL', "Portugal": 'pt_PT', "RSA": 'en_US',
-    "Saudi Arabia": 'ar_SA', "Singapore": 'en_US', "Spain": 'es_ES', "Sweden": 'sv_SE',
-    "Switzerland": 'de_CH', "USA": 'en_US', "United Arab Emirates": 'ar_AE',
-    "United Kingdom": 'en_GB', "Unspecified": 'en_US'
-}
-
-names_by_country = {}
-for country, locale in countries_locale.items():
-    faker = Faker(locale)
-    first_names = [faker.first_name() for _ in range(1000)]
-    last_names = [faker.last_name() for _ in range(1000)]
-    full_names = [f"{random.choice(first_names)} {random.choice(last_names)}" for _ in range(1000)]
-    names_by_country[country] = full_names
-
-def assign_name(row):
-    country = row['country_name']
-    if country in names_by_country:
-        return random.choice(names_by_country[country])
-    return "Unknown"
-
-customers['customer_name'] = customers.apply(assign_name, axis=1)
-customers = customers.drop(columns=['country_name'])
-dim_customers = customers.drop_duplicates(subset=['customer_id'], keep='first').reset_index(drop=True)
-
-
-### dim_items
-
-items = transactions.groupby(['item_uuid','item_id', 'item_description']).count()[[]].reset_index()
-
-items['is_operational_item'] = (items['item_id'].str.len() < 5) | (items['item_id'].str.contains('gift', case=False))
-items['item_family_id'] = items['item_id'].str.extract(r'^(\d+)', expand=False)
-items['item_variant'] = items['item_id'].str.extract(r'(\D+)$', expand=False).fillna('')
-items['item_variant'] = np.where(items['item_id'] == items['item_family_id'],  np.nan, items['item_variant'])
-
-selected_items = items[items['is_operational_item'] == False]
-
-selected_items['is_all_uppercase'] = selected_items['item_description'].str.isupper()
-selected_items['description_len'] = selected_items['item_description'].str.len()
-selected_items = selected_items.sort_values(by=['item_id', 'description_len'], ascending=[True, False])
-selected_items['description_order'] = selected_items.groupby('item_id').cumcount() + 1
-
-weird_items = selected_items[((selected_items['description_order'] > 1) & (selected_items['description_len'] < 13)) | ~selected_items['is_all_uppercase']]
-description_list = weird_items['item_description'].drop_duplicates().tolist()
-print(description_list)
-
-is_unknown_item = []
-is_error_item = []
-is_special_item = []
-is_modification_item = []
-
-for description in description_list:
-    description_lower = description.lower()
-    if any(word in description_lower for word in [
-        'check', 'damage', 'wet', 'lost', 'found', 'error', 'wrong', 'faulty', 'mouldy', 'smashed', 'broken', 'crush', 'crack', 'unsaleable', 'missing', 'throw away'
-    ]):
-        is_error_item.append(description)
-    elif any(word in description_lower for word in [
-        'dotcom', 'amazon', 'fba', 'ebay', 'john lewis', 'showroom', 'voucher', 'cordial jug', 'website'
-    ]):
-        is_special_item.append(description)
-    elif any(word in description_lower for word in [
-        'adjust', 'sample', 'sold as', 'mailout', 'allocate', 'temp', 'credit', 'sale', 're-adjustment', 'label mix up'
-    ]):
-        is_modification_item.append(description)
-
-
-is_unknown_item = ['?','??','???','Incorrect stock entry.',"can't find",'nan',None]
-
-is_error_item += [
-    'on cargo order', 'test', 'barcode problem', 'mixed up', 'michel oops', 'printing smudges/thrown away', 
-    'had been put aside', 'rusty thrown away', 'incorrectly made-thrown away.', 'Breakages', 'counted', 
-    'Had been put aside.', 'returned', 'thrown away', 'mystery! Only ever imported 1800', 'Dagamed', 
-    'code mix up? 84930', 'Printing smudges/thrown away', 'came coded as 20713', 'incorrect stock entry.',
-    "thrown away-can't sell",'Thrown away-rusty','Thrown away.','Given away','historic computer difference?....se',
-    'alan hodge cant mamage this section',"thrown away-can't sell.", 'label mix up','sold in set?','mix up with c'
-]
-
-is_special_item += [
-    'MIA', '?display?', 'Amazon Adjustment', 'Lighthouse Trading zero invc incorr', 
-    'Dotcomgiftshop Gift Voucher £100.00', 'sold as set?', 
-    'High Resolution Image', 'John Lewis','Bank Charges','Next Day Carriage'
-]
-
-is_modification_item += [
-    'Adjustment', 'OOPS ! adjustment', 'reverse 21/5/10 adjustment', 'reverse previous adjustment', 
-    'marked as 23343', 'incorrectly put back into stock', 'Not rcvd in 10/11/2010 delivery', 'Display', 
-    'Had been put aside.',  'sold as set by dotcom', 'add stock to allocate online orders', 
-    'allocate stock for dotcom orders ta', 'for online retail orders', 'Marked as 23343'
-]
-
-unclassified_items = set(description_list) - set(is_error_item) - set(is_special_item) - set(is_modification_item)
-
-
-items['is_unknown_item'] = items['item_description'].str.lower().isin(is_unknown_item)
-items['is_error_item'] = items['item_description'].str.lower().isin(is_error_item)
-items['is_special_item'] = items['item_description'].str.lower().isin(is_special_item)
-items['is_modification_item'] = items['item_description'].str.lower().isin(is_modification_item)
-
-items = items[['item_uuid', 'item_id', 'item_family_id', 'item_description', 'item_variant', 'is_operational_item', 'is_unknown_item', 'is_special_item', 'is_modification_item', 'is_error_item']]
-
-items.loc[items['is_operational_item'], ['item_variant', 'is_unknown_item', 'is_special_item', 'is_modification_item', 'is_error_item']] = [None, False, False, False, False]
-items.loc[items['is_unknown_item']] = items.loc[items['is_unknown_item']].replace('', None)
-items.loc[items['is_special_item']] = items.loc[items['is_special_item']].replace('', None)
-items.loc[items['is_modification_item']] = items.loc[items['is_modification_item']].replace('', None)
-items.loc[items['is_error_item']] = items.loc[items['is_error_item']].replace('', None)
-
-dim_items = items.copy()
-dim_items['item_family_id'] = dim_items['item_family_id'].astype('Int64')
-
-
-
+    print(f"dim_location saved successfully to {full_output_path}")
