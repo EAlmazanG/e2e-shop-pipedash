@@ -7,25 +7,41 @@ bucket_name = 'e2e-shop-bucket'
 folder = 'raw/'
 
 def lambda_handler(event, context):
-    repo_file_url = 'https://github.com/EAlmazanG/e2e-shop-pipedash/blob/main/data/main_product_descriptions.csv'
-    file_name = 'product_descriptions.csv'
+    # URLs and file names for the two files
+    files = [
+        {
+            "url": "https://github.com/EAlmazanG/e2e-shop-pipedash/blob/main/data/main_product_descriptions.csv",
+            "file_name": "main_product_descriptions.csv"
+        },
+        {
+            "url": "https://github.com/EAlmazanG/e2e-shop-pipedash/blob/main/data/retail.csv",
+            "file_name": "retail.csv"
+        }
+    ]
+
+    results = []
 
     try:
-        # Download the file using urllib
-        response = urllib.request.urlopen(repo_file_url)
-        data = response.read()
+        for file in files:
+            # Download the file using urllib
+            response = urllib.request.urlopen(file["url"])
+            data = response.read()
 
-        # Upload to S3
-        s3_client.put_object(
-            Bucket=bucket_name,
-            Key=f"{folder}{file_name}",
-            Body=data,
-            ContentType='text/csv'
-        )
+            # Upload to S3
+            s3_client.put_object(
+                Bucket=bucket_name,
+                Key=f"{folder}{file['file_name']}",
+                Body=data,
+                ContentType='text/csv'
+            )
+
+            results.append(f"File {file['file_name']} successfully uploaded to {bucket_name}/{folder}")
+
         return {
             'statusCode': 200,
-            'body': f"File {file_name} successfully uploaded to {bucket_name}/{folder}"
+            'body': results
         }
+
     except Exception as e:
         return {
             'statusCode': 500,
