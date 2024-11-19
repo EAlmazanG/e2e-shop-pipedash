@@ -10,11 +10,11 @@ def lambda_handler(event, context):
     # URLs and file names for the two files
     files = [
         {
-            "url": "https://github.com/EAlmazanG/e2e-shop-pipedash/blob/main/data/main_product_descriptions.csv",
+            "url": "https://raw.githubusercontent.com/EAlmazanG/e2e-shop-pipedash/refs/heads/main/data/main_product_descriptions.csv",
             "file_name": "main_product_descriptions.csv"
         },
         {
-            "url": "https://github.com/EAlmazanG/e2e-shop-pipedash/blob/main/data/retail.csv",
+            "url": "https://raw.githubusercontent.com/EAlmazanG/e2e-shop-pipedash/65a8928a2c315aba1a3b20d749d33dfb8c8df2fe/data/retail.csv",
             "file_name": "retail.csv"
         }
     ]
