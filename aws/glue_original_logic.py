@@ -289,6 +289,33 @@ dim_customers = customers.drop_duplicates(subset=['customer_id'], keep='first').
 
 ### dim_items
 
+transactions = raw_retail.copy()
+
+transactions = transactions.rename(columns={
+    'InvoiceNo': 'invoice_id',
+    'StockCode': 'item_id',
+    'Description': 'item_description',
+    'Quantity': 'quantity_amount',
+    'InvoiceDate': 'event_timestamp_invoiced_at',
+    'UnitPrice': 'unit_price_eur',
+    'CustomerID': 'customer_id',
+    'Country': 'country_name'
+})
+
+transactions['invoice_id'] = transactions['invoice_id'].astype(str)
+transactions['item_id'] = transactions['item_id'].astype(str)
+transactions['item_description'] = transactions['item_description'].astype(str)
+transactions['quantity_amount'] = transactions['quantity_amount'].astype(int)
+transactions['event_timestamp_invoiced_at'] = pd.to_datetime(transactions['event_timestamp_invoiced_at'])
+transactions['unit_price_eur'] = transactions['unit_price_eur'].astype(float)
+transactions['customer_id'] = transactions['customer_id'].astype('Int64')
+transactions['country_name'] = transactions['country_name'].astype(str)
+transactions.index.name = 'transaction_id'
+transactions.reset_index(inplace=True)
+transactions['transaction_id'] = transactions['transaction_id'].astype('Int64')
+transactions['item_uuid'] = transactions.apply(lambda row: generate_hash(row, ['item_id', 'item_description']), axis=1)
+
+
 items = transactions.groupby(['item_uuid','item_id', 'item_description']).count()[[]].reset_index()
 
 items['is_operational_item'] = (items['item_id'].str.len() < 5) | (items['item_id'].str.contains('gift', case=False))

@@ -1,7 +1,8 @@
 import hashlib
 from pyspark.context import SparkContext
 from pyspark.sql import SparkSession
-from pyspark.sql.functions import col, lit, expr, dayofweek, when, date_format, to_date
+from pyspark.sql.window import Window
+from pyspark.sql.functions import col, lit, expr, dayofweek, when, date_format, to_date, lower, length, row_number, collect_list, array_contains
 from pyspark.sql.types import IntegerType, DateType, StringType, BooleanType, StructType, StructField
 from awsglue.context import GlueContext
 from awsglue.utils import getResolvedOptions
@@ -69,6 +70,7 @@ def create_fact_transactions(spark, s3_bucket, input_path, dim_date_path, dim_lo
     dim_date = spark.read.parquet(f"s3://{s3_bucket}/{dim_date_path}")
     dim_location = spark.read.parquet(f"s3://{s3_bucket}/{dim_location_path}")
 
+    # Seleccionar y transformar datos
     fact_transactions = raw_data.selectExpr(
         "InvoiceNo as invoice_id",
         "StockCode as item_id",
@@ -79,12 +81,295 @@ def create_fact_transactions(spark, s3_bucket, input_path, dim_date_path, dim_lo
         "cast(CustomerID as int) as customer_id",
         "Country as country_name"
     ).withColumn("transaction_id", expr("monotonically_increasing_id()")) \
-     .join(dim_date, to_date(col("event_timestamp_invoiced_at")) == dim_date["date"], "left") \
-     .withColumnRenamed("date_id", "transaction_date_id") \
-     .join(dim_location, "country_name", "left") \
-     .withColumn("total_price_eur", col("quantity_amount") * col("unit_price_eur"))
+     .withColumn("item_uuid", expr("sha2(concat_ws('_', item_id, item_description), 256)")) \
+     .withColumn("date", to_date(col("event_timestamp_invoiced_at")))
+
+    fact_transactions = fact_transactions.join(
+        dim_date.withColumnRenamed("date", "dim_date_date"),
+        fact_transactions["date"] == dim_date["dim_date_date"],
+        "left"
+    ).withColumnRenamed("date_id", "date_id") \
+     .drop("dim_date_date")
+
+    fact_transactions = fact_transactions.join(
+        dim_location.select("country_name", "country_id"),
+        "country_name",
+        "left"
+    )
+
+    fact_transactions = fact_transactions.withColumn(
+        "total_price_eur",
+        col("quantity_amount") * col("unit_price_eur")
+    )
+
+    fact_transactions = fact_transactions.select(
+        "transaction_id",
+        "invoice_id",
+        "event_timestamp_invoiced_at",
+        "date_id",
+        "item_uuid",
+        "item_id",
+        "transaction_date_id",
+        "quantity_amount",
+        "unit_price_eur",
+        "total_price_eur",
+        "customer_id",
+        "country_id"
+    )
 
     save_data_to_s3(fact_transactions, s3_bucket, output_path)
+
+def create_dim_items(spark, s3_bucket, input_path, output_path):
+    raw_data = load_data_from_s3(spark, s3_bucket, input_path)
+
+    transactions = raw_data.selectExpr(
+        "InvoiceNo as invoice_id",
+        "StockCode as item_id",
+        "Description as item_description",
+        "cast(Quantity as int) as quantity_amount",
+        "to_timestamp(InvoiceDate, 'yyyy-MM-dd HH:mm:ss') as event_timestamp_invoiced_at",
+        "cast(UnitPrice as float) as unit_price_eur",
+        "cast(CustomerID as int) as customer_id",
+        "Country as country_name"
+    ).withColumn("transaction_id", expr("monotonically_increasing_id()")) \
+     .withColumn("item_uuid", expr("sha2(concat_ws('_', item_id, item_description), 256)")) \
+     .withColumn("date", to_date(col("event_timestamp_invoiced_at")))
+
+    items = transactions.groupBy("item_uuid", "item_id", "item_description").count()
+
+    items = items.withColumn(
+        "is_operational_item",
+        (length(col("item_id")) < 5) | col("item_id").rlike("(?i)gift")
+    ).withColumn(
+        "item_family_id", expr("regexp_extract(item_id, '^\\d+', 0)")
+    ).withColumn(
+        "item_variant", expr("regexp_extract(item_id, '\\D+$', 0)")
+    ).withColumn(
+        "item_variant", when(col("item_id") == col("item_family_id"), lit(None)).otherwise(col("item_variant"))
+    )
+
+    is_unknown_item = ['?','??','???','Incorrect stock entry.',"can't find",'nan',None]
+
+    is_error_item = [
+        'check',
+        'damaged',
+        'wet/rusty',
+        'found',
+        'lost in space',
+        'wrongly marked. 23343 in box',
+        'wrongly marked 23343',
+        'wrongly coded 23343',
+        'wrongly coded-23343',
+        'Found',
+        'damages',
+        'damages/display',
+        'WET/MOULDY',
+        'damages?',
+        'Damaged',
+        'wet',
+        'wet rusty',
+        'wrongly marked',
+        'broken',
+        'CHECK',
+        'wrong barcode',
+        '?missing',
+        'smashed',
+        'missing',
+        '???lost',
+        'faulty',
+        'Missing',
+        '?lost',
+        'wrongly sold (22719) barcode',
+        'wrong code?',
+        'wet boxes',
+        '?? missing',
+        'missing?',
+        'lost',
+        'mouldy, thrown away.',
+        'mouldy, unsaleable.',
+        'damages/showroom etc',
+        'wrong barcode (22467)',
+        'wrong code',
+        'FOUND',
+        'Wrongly mrked had 85123a in box',
+        'water damage',
+        'rusty throw away',
+        'Crushed',
+        'mouldy',
+        '20713 wrongly marked',
+        'wrongly coded 20713',
+        'sold with wrong barcode',
+        'Sale error',
+        'Found by jackie',
+        'found some more on shelf',
+        'damages/dotcom?',
+        'damaged stock',
+        'found box',
+        'throw away',
+        'Wet pallet-thrown away',
+        'wet pallet',
+        '???missing',
+        '????missing',
+        'Water damaged',
+        'damages/credits from ASOS.',
+        'Unsaleable, destroyed.',
+        'crushed',
+        'crushed ctn',
+        'cracked',
+        'Damages/samples',
+        'water damaged',
+        'wet damaged',
+        'wet?',
+        'damages wax',
+        'stock creditted wrongly',
+        '????damages????',
+        'check?',
+        'wrongly marked carton 22804',
+        'Damages',
+        'samples/damages',
+        'DAMAGED',
+        'wrongly sold as sets',
+        'wrongly sold sets',
+        'Found in w/hse',
+        'lost??',
+        'stock check',
+        'crushed boxes',
+        'on cargo order',
+        'test',
+        'barcode problem',
+        'mixed up',
+        'michel oops',
+        'printing smudges/thrown away',
+        'had been put aside',
+        'rusty thrown away',
+        'incorrectly made-thrown away.',
+        'Breakages',
+        'counted',
+        'Had been put aside.',
+        'returned',
+        'thrown away',
+        'mystery! Only ever imported 1800',
+        'Dagamed',
+        'code mix up? 84930',
+        'Printing smudges/thrown away',
+        'came coded as 20713',
+        'incorrect stock entry.',
+        "thrown away-can't sell",
+        'Thrown away-rusty',
+        'Thrown away.',
+        'Given away',
+        'historic computer difference?....se',
+        'alan hodge cant mamage this section',
+        "thrown away-can't sell.",
+        'label mix up',
+        'sold in set?',
+        'mix up with c']
+
+    is_special_item = [
+        'dotcom',
+        'Amazon Adjustment',
+        'sold as set on dotcom',
+        'Sold as 1 on dotcom',
+        'rcvd be air temp fix for dotcom sit',
+        're dotcom quick fix.',
+        'sold as set on dotcom and amazon',
+        'showroom',
+        'amazon adjust',
+        'Amazon',
+        'John Lewis',
+        'Dotcomgiftshop Gift Voucher £100.00',
+        "Dotcom sold in 6's",
+        'amazon',
+        'amazon sales',
+        'AMAZON',
+        'CORDIAL JUG',
+        'allocate stock for dotcom orders ta',
+        'website fixed',
+        'dotcom adjust',
+        'sold as set/6 by dotcom',
+        'sold as set by dotcom',
+        'Dotcom sales',
+        'dotcom sales',
+        'Dotcom',
+        'dotcomstock',
+        'FBA',
+        'Dotcom set',
+        'dotcom sold sets',
+        'Amazon sold sets',
+        'ebay',
+        'MIA',
+        '?display?',
+        'Amazon Adjustment',
+        'Lighthouse Trading zero invc incorr',
+        'Dotcomgiftshop Gift Voucher £100.00',
+        'sold as set?',
+        'High Resolution Image',
+        'John Lewis',
+        'Bank Charges',
+        'Next Day Carriage'
+ ]
+
+    is_modification_item = [
+        'Adjustment',
+        'adjustment',
+        'taig adjust no stock',
+        'Show Samples',
+        'samples',
+        'sold as 1',
+        'OOPS ! adjustment',
+        'taig adjust',
+        'reverse 21/5/10 adjustment',
+        'sold as 22467',
+        'add stock to allocate online orders',
+        'temp adjustment',
+        'mailout ',
+        'mailout',
+        're-adjustment',
+        'did  a credit  and did not tick ret',
+        'incorrectly credited C550456 see 47',
+        'reverse previous adjustment',
+        'adjust',
+        'label mix up',
+        '?sold as sets?',
+        '? sold as sets?',
+        'Adjustment',
+        'OOPS ! adjustment',
+        'reverse 21/5/10 adjustment',
+        'reverse previous adjustment',
+        'marked as 23343',
+        'incorrectly put back into stock',
+        'Not rcvd in 10/11/2010 delivery',
+        'Display',
+        'Had been put aside.',
+        'sold as set by dotcom',
+        'add stock to allocate online orders',
+        'allocate stock for dotcom orders ta',
+        'for online retail orders',
+        'Marked as 23343'
+    ]
+
+    items = items.withColumn("is_unknown_item", col("item_description").isin(is_unknown_item)) \
+                 .withColumn("is_error_item", col("item_description").isin(is_error_item)) \
+                 .withColumn("is_special_item", col("item_description").isin(is_special_item)) \
+                 .withColumn("is_modification_item", col("item_description").isin(is_modification_item))
+
+    items = items.withColumn("item_family_id", col("item_family_id").cast("int"))
+
+    items = items.select(
+        "item_uuid",
+        "item_id",
+        "item_family_id",
+        "item_description",
+        "item_variant",
+        "is_operational_item",
+        "is_unknown_item",
+        "is_special_item",
+        "is_modification_item",
+        "is_error_item"
+    )
+
+    save_data_to_s3(items, s3_bucket, output_path)
+
 
 def main():
     s3_bucket = "e2e-shop-bucket"
