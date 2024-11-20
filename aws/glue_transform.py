@@ -1,8 +1,10 @@
 import hashlib
+from faker import Faker
+import random
 from pyspark.context import SparkContext
 from pyspark.sql import SparkSession
 from pyspark.sql.window import Window
-from pyspark.sql.functions import col, lit, expr, dayofweek, when, date_format, to_date, lower, length, row_number, collect_list, array_contains
+from pyspark.sql.functions import col, lit, expr, dayofweek, when, date_format, to_date, lower, length, row_number, collect_list, array_contains, round, to_timestamp, rand
 from pyspark.sql.types import IntegerType, DateType, StringType, BooleanType, StructType, StructField
 from awsglue.context import GlueContext
 from awsglue.utils import getResolvedOptions
@@ -10,6 +12,19 @@ from awsglue.utils import getResolvedOptions
 def generate_hash(*cols):
     combined_string = "_".join(map(str, cols))
     return hashlib.md5(combined_string.encode()).hexdigest()
+
+def generate_names(country, countries_locale):
+    locale = countries_locale.get(country, 'en_US')
+    faker = Faker(locale)
+    first_names = [faker.first_name() for _ in range(30)]
+    last_names = [faker.last_name() for _ in range(30)]
+    full_names = [f"{random.choice(first_names)} {random.choice(last_names)}" for _ in range(30)]
+    return full_names
+
+def assign_name(country, names_by_country):
+    if country in names_by_country:
+        return random.choice(names_by_country[country])
+    return "Unknown"
 
 def initialize_spark(app_name="pyspark-e2e-shop-session"):
     sc = SparkContext()
@@ -65,31 +80,41 @@ def create_dim_location(spark, s3_bucket, country_data, output_path):
     )), schema=schema)
     save_data_to_s3(dim_location, s3_bucket, output_path)
 
-def create_fact_transactions(spark, s3_bucket, input_path, dim_date_path, dim_location_path, output_path):
+def create_stg_transactions(spark, s3_bucket, input_path, output_path):
     raw_data = load_data_from_s3(spark, s3_bucket, input_path)
-    dim_date = spark.read.parquet(f"s3://{s3_bucket}/{dim_date_path}")
-    dim_location = spark.read.parquet(f"s3://{s3_bucket}/{dim_location_path}")
 
-    # Seleccionar y transformar datos
-    fact_transactions = raw_data.selectExpr(
+    stg_transactions = raw_data.selectExpr(
         "InvoiceNo as invoice_id",
         "StockCode as item_id",
         "Description as item_description",
         "cast(Quantity as int) as quantity_amount",
-        "to_timestamp(InvoiceDate, 'yyyy-MM-dd HH:mm:ss') as event_timestamp_invoiced_at",
         "cast(UnitPrice as float) as unit_price_eur",
         "cast(CustomerID as int) as customer_id",
-        "Country as country_name"
-    ).withColumn("transaction_id", expr("monotonically_increasing_id()")) \
-     .withColumn("item_uuid", expr("sha2(concat_ws('_', item_id, item_description), 256)")) \
-     .withColumn("date", to_date(col("event_timestamp_invoiced_at")))
+        "Country as country_name",
+        "InvoiceDate as raw_invoice_date"
+    ).withColumn(
+        "event_timestamp_invoiced_at",
+        to_timestamp(col("raw_invoice_date"), "M/d/yy H:mm")
+    ).withColumn(
+        "transaction_id", expr("monotonically_increasing_id()")
+    ).withColumn(
+        "item_uuid", expr("sha2(concat_ws('_', item_id, item_description), 256)")
+    ).withColumn(
+        "date", to_date(col("event_timestamp_invoiced_at"))
+    )
+    
+    save_data_to_s3(stg_transactions, s3_bucket, output_path)
 
-    fact_transactions = fact_transactions.join(
-        dim_date.withColumnRenamed("date", "dim_date_date"),
-        fact_transactions["date"] == dim_date["dim_date_date"],
+def create_fact_transactions(spark, s3_bucket, input_path, dim_date_path, dim_location_path, output_path):
+    stg_transactions = spark.read.parquet(f"s3://{s3_bucket}/{input_path}")
+    dim_date = spark.read.parquet(f"s3://{s3_bucket}/{dim_date_path}")
+    dim_location = spark.read.parquet(f"s3://{s3_bucket}/{dim_location_path}")
+
+    fact_transactions = stg_transactions.join(
+        dim_date,
+        stg_transactions["date"] == dim_date["date"],
         "left"
-    ).withColumnRenamed("date_id", "date_id") \
-     .drop("dim_date_date")
+    )
 
     fact_transactions = fact_transactions.join(
         dim_location.select("country_name", "country_id"),
@@ -99,7 +124,7 @@ def create_fact_transactions(spark, s3_bucket, input_path, dim_date_path, dim_lo
 
     fact_transactions = fact_transactions.withColumn(
         "total_price_eur",
-        col("quantity_amount") * col("unit_price_eur")
+        round(col("quantity_amount") * col("unit_price_eur"), 2)
     )
 
     fact_transactions = fact_transactions.select(
@@ -109,7 +134,6 @@ def create_fact_transactions(spark, s3_bucket, input_path, dim_date_path, dim_lo
         "date_id",
         "item_uuid",
         "item_id",
-        "transaction_date_id",
         "quantity_amount",
         "unit_price_eur",
         "total_price_eur",
@@ -118,38 +142,27 @@ def create_fact_transactions(spark, s3_bucket, input_path, dim_date_path, dim_lo
     )
 
     save_data_to_s3(fact_transactions, s3_bucket, output_path)
-
+    
 def create_dim_items(spark, s3_bucket, input_path, output_path):
-    raw_data = load_data_from_s3(spark, s3_bucket, input_path)
+    stg_transactions = spark.read.parquet(f"s3://{s3_bucket}/{input_path}")
 
-    transactions = raw_data.selectExpr(
-        "InvoiceNo as invoice_id",
-        "StockCode as item_id",
-        "Description as item_description",
-        "cast(Quantity as int) as quantity_amount",
-        "to_timestamp(InvoiceDate, 'yyyy-MM-dd HH:mm:ss') as event_timestamp_invoiced_at",
-        "cast(UnitPrice as float) as unit_price_eur",
-        "cast(CustomerID as int) as customer_id",
-        "Country as country_name"
-    ).withColumn("transaction_id", expr("monotonically_increasing_id()")) \
-     .withColumn("item_uuid", expr("sha2(concat_ws('_', item_id, item_description), 256)")) \
-     .withColumn("date", to_date(col("event_timestamp_invoiced_at")))
-
-    items = transactions.groupBy("item_uuid", "item_id", "item_description").count()
+    items = stg_transactions.groupBy("item_uuid", "item_id", "item_description").count()
 
     items = items.withColumn(
         "is_operational_item",
         (length(col("item_id")) < 5) | col("item_id").rlike("(?i)gift")
     ).withColumn(
-        "item_family_id", expr("regexp_extract(item_id, '^\\d+', 0)")
+        "item_family_id",
+        when(col("item_id").rlike("^[0-9]+"), expr("regexp_extract(item_id, '^([0-9]+)', 1)")).otherwise(None)
     ).withColumn(
-        "item_variant", expr("regexp_extract(item_id, '\\D+$', 0)")
+        "item_variant",
+        when(col("item_id").rlike("[A-Za-z]+$"), expr("regexp_extract(item_id, '([A-Za-z]+)$', 1)")).otherwise("")
     ).withColumn(
-        "item_variant", when(col("item_id") == col("item_family_id"), lit(None)).otherwise(col("item_variant"))
+        "item_variant",
+        when(col("item_id") == col("item_family_id"), lit(None)).otherwise(col("item_variant"))
     )
 
     is_unknown_item = ['?','??','???','Incorrect stock entry.',"can't find",'nan',None]
-
     is_error_item = [
         'check',
         'damaged',
@@ -263,8 +276,8 @@ def create_dim_items(spark, s3_bucket, input_path, output_path):
         "thrown away-can't sell.",
         'label mix up',
         'sold in set?',
-        'mix up with c']
-
+        'mix up with c'
+    ]
     is_special_item = [
         'dotcom',
         'Amazon Adjustment',
@@ -307,8 +320,7 @@ def create_dim_items(spark, s3_bucket, input_path, output_path):
         'John Lewis',
         'Bank Charges',
         'Next Day Carriage'
- ]
-
+    ]
     is_modification_item = [
         'Adjustment',
         'adjustment',
@@ -348,10 +360,18 @@ def create_dim_items(spark, s3_bucket, input_path, output_path):
         'Marked as 23343'
     ]
 
-    items = items.withColumn("is_unknown_item", col("item_description").isin(is_unknown_item)) \
-                 .withColumn("is_error_item", col("item_description").isin(is_error_item)) \
-                 .withColumn("is_special_item", col("item_description").isin(is_special_item)) \
-                 .withColumn("is_modification_item", col("item_description").isin(is_modification_item))
+    items = items.withColumn("is_unknown_item", col("item_description").isin(is_unknown_item).cast("boolean"))
+    items = items.withColumn("is_error_item", col("item_description").isin(is_error_item).cast("boolean"))
+    items = items.withColumn("is_special_item", col("item_description").isin(is_special_item).cast("boolean"))
+    items = items.withColumn("is_modification_item", col("item_description").isin(is_modification_item).cast("boolean"))
+
+    items = items.fillna({
+        "is_operational_item": False,
+        "is_unknown_item": False,
+        "is_special_item": False,
+        "is_modification_item": False,
+        "is_error_item": False
+    })
 
     items = items.withColumn("item_family_id", col("item_family_id").cast("int"))
 
@@ -370,6 +390,43 @@ def create_dim_items(spark, s3_bucket, input_path, output_path):
 
     save_data_to_s3(items, s3_bucket, output_path)
 
+def create_dim_customers(spark, s3_bucket, input_path, output_path):
+    stg_transactions = spark.read.parquet(f"s3://{s3_bucket}/{input_path}")
+
+    customers = stg_transactions.select("customer_id", "country_name") \
+        .filter(col("customer_id").isNotNull()) \
+        .groupBy("customer_id") \
+        .agg(expr("first(country_name) as country_name"))
+
+    countries_locale = {
+        "Australia": 'en_AU', "Austria": 'de_AT', "Bahrain": 'en_US', "Belgium": 'fr_BE',
+        "Brazil": 'pt_BR', "Canada": 'en_CA', "Channel Islands": 'en_GB', "Cyprus": 'el_CY',
+        "Czech Republic": 'cs_CZ', "Denmark": 'da_DK', "EIRE": 'en_IE', "European Community": 'en_US',
+        "Finland": 'fi_FI', "France": 'fr_FR', "Germany": 'de_DE', "Greece": 'el_GR',
+        "Iceland": 'en_US', "Israel": 'he_IL', "Italy": 'it_IT', "Japan": 'ja_JP',
+        "Lebanon": 'ar_SA', "Lithuania": 'lt_LT', "Malta": 'mt_MT', "Netherlands": 'nl_NL',
+        "Norway": 'no_NO', "Poland": 'pl_PL', "Portugal": 'pt_PT', "RSA": 'en_US',
+        "Saudi Arabia": 'ar_SA', "Singapore": 'en_US', "Spain": 'es_ES', "Sweden": 'sv_SE',
+        "Switzerland": 'de_CH', "USA": 'en_US', "United Arab Emirates": 'ar_AE',
+        "United Kingdom": 'en_GB', "Unspecified": 'en_US'
+    }
+
+    names_data = [(country, name) for country, locale in countries_locale.items()
+                  for name in generate_names(country, countries_locale)]
+    names_df = spark.createDataFrame(names_data, ["country_name", "customer_name"])
+
+    customers = customers.join(names_df, on="country_name", how="left")
+    customers = customers.withColumn("random_value", rand())
+    window_spec = Window.partitionBy("customer_id").orderBy("random_value")
+    customers = customers.withColumn("row_number", row_number().over(window_spec))
+    customers = customers.filter(col("row_number") == 1).drop("row_number", "random_value")
+    customers = customers.withColumn(
+        "customer_name",
+        when(col("customer_name").isNull(), lit("Unknown")).otherwise(col("customer_name"))
+    )
+
+    dim_customers = customers.select("customer_id", "customer_name").drop_duplicates()
+    save_data_to_s3(dim_customers, s3_bucket, output_path)
 
 def main():
     s3_bucket = "e2e-shop-bucket"
@@ -519,21 +576,21 @@ def main():
     }
 
     spark = initialize_spark()
+    
+    # Create stg tables
+    create_stg_transactions(spark, s3_bucket, input_path_retail, "clean/stg_transactions/")
 
-    # Create dimensions
+    # Create init dimensions
     create_dim_item_family(spark, s3_bucket, input_path_raw_main_product_descriptions, "clean/dim_item_family/")
     create_dim_date(spark, s3_bucket, date_start, date_end, "clean/dim_date/")
     create_dim_location(spark, s3_bucket, country_data, "clean/dim_location/")
 
+    # Create complex dimensions
+    create_dim_items(spark, s3_bucket, "clean/stg_transactions/", "clean/dim_items/")
+    create_dim_customers(spark, s3_bucket, "clean/stg_transactions/", "clean/dim_customers/")
+    
     # Create fact table
-    create_fact_transactions(
-        spark,
-        s3_bucket,
-        input_path_retail,
-        "clean/dim_date/",
-        "clean/dim_location/",
-        "clean/fact_transactions/"
-    )
-
+    create_fact_transactions(spark, s3_bucket, "clean/stg_transactions/", "clean/dim_date/", "clean/dim_location/", "clean/fact_transactions/")
+    
 if __name__ == "__main__":
     main()
