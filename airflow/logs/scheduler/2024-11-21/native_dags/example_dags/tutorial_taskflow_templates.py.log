@@ -41,3 +41,10 @@
 [2024-11-21T17:43:52.889+0100] {logging_mixin.py:190} INFO - [2024-11-21T17:43:52.889+0100] {dag.py:3239} INFO - Sync 1 DAGs
 [2024-11-21T17:43:52.902+0100] {logging_mixin.py:190} INFO - [2024-11-21T17:43:52.902+0100] {dag.py:4180} INFO - Setting next_dagrun for tutorial_taskflow_templates to 2024-11-20 00:00:00+00:00, run_after=2024-11-21 00:00:00+00:00
 [2024-11-21T17:43:52.916+0100] {processor.py:208} INFO - Processing /Users/jobandtalent/opt/anaconda3/envs/e2s-env/lib/python3.9/site-packages/airflow/example_dags/tutorial_taskflow_templates.py took 0.266 seconds
+[2024-11-21T17:46:42.771+0100] {processor.py:186} INFO - Started process (PID=4250) to work on /Users/jobandtalent/opt/anaconda3/envs/e2s-env/lib/python3.9/site-packages/airflow/example_dags/tutorial_taskflow_templates.py
+[2024-11-21T17:46:42.772+0100] {processor.py:914} INFO - Processing file /Users/jobandtalent/opt/anaconda3/envs/e2s-env/lib/python3.9/site-packages/airflow/example_dags/tutorial_taskflow_templates.py for tasks to queue
+[2024-11-21T17:46:42.773+0100] {logging_mixin.py:190} INFO - [2024-11-21T17:46:42.773+0100] {dagbag.py:588} INFO - Filling up the DagBag from /Users/jobandtalent/opt/anaconda3/envs/e2s-env/lib/python3.9/site-packages/airflow/example_dags/tutorial_taskflow_templates.py
+[2024-11-21T17:46:42.812+0100] {processor.py:925} INFO - DAG(s) 'tutorial_taskflow_templates' retrieved from /Users/jobandtalent/opt/anaconda3/envs/e2s-env/lib/python3.9/site-packages/airflow/example_dags/tutorial_taskflow_templates.py
+[2024-11-21T17:46:42.877+0100] {logging_mixin.py:190} INFO - [2024-11-21T17:46:42.876+0100] {dag.py:3239} INFO - Sync 1 DAGs
+[2024-11-21T17:46:42.887+0100] {logging_mixin.py:190} INFO - [2024-11-21T17:46:42.887+0100] {dag.py:4180} INFO - Setting next_dagrun for tutorial_taskflow_templates to 2024-11-20 00:00:00+00:00, run_after=2024-11-21 00:00:00+00:00
+[2024-11-21T17:46:42.901+0100] {processor.py:208} INFO - Processing /Users/jobandtalent/opt/anaconda3/envs/e2s-env/lib/python3.9/site-packages/airflow/example_dags/tutorial_taskflow_templates.py took 0.141 seconds

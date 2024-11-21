@@ -41,3 +41,10 @@
 [2024-11-21T17:44:00.034+0100] {logging_mixin.py:190} INFO - [2024-11-21T17:44:00.034+0100] {dag.py:3239} INFO - Sync 1 DAGs
 [2024-11-21T17:44:00.042+0100] {logging_mixin.py:190} INFO - [2024-11-21T17:44:00.042+0100] {dag.py:4180} INFO - Setting next_dagrun for tutorial_taskflow_api to None, run_after=None
 [2024-11-21T17:44:00.056+0100] {processor.py:208} INFO - Processing /Users/jobandtalent/opt/anaconda3/envs/e2s-env/lib/python3.9/site-packages/airflow/example_dags/tutorial_taskflow_api.py took 0.140 seconds
+[2024-11-21T17:46:48.551+0100] {processor.py:186} INFO - Started process (PID=4278) to work on /Users/jobandtalent/opt/anaconda3/envs/e2s-env/lib/python3.9/site-packages/airflow/example_dags/tutorial_taskflow_api.py
+[2024-11-21T17:46:48.554+0100] {processor.py:914} INFO - Processing file /Users/jobandtalent/opt/anaconda3/envs/e2s-env/lib/python3.9/site-packages/airflow/example_dags/tutorial_taskflow_api.py for tasks to queue
+[2024-11-21T17:46:48.554+0100] {logging_mixin.py:190} INFO - [2024-11-21T17:46:48.554+0100] {dagbag.py:588} INFO - Filling up the DagBag from /Users/jobandtalent/opt/anaconda3/envs/e2s-env/lib/python3.9/site-packages/airflow/example_dags/tutorial_taskflow_api.py
+[2024-11-21T17:46:48.585+0100] {processor.py:925} INFO - DAG(s) 'tutorial_taskflow_api' retrieved from /Users/jobandtalent/opt/anaconda3/envs/e2s-env/lib/python3.9/site-packages/airflow/example_dags/tutorial_taskflow_api.py
+[2024-11-21T17:46:48.647+0100] {logging_mixin.py:190} INFO - [2024-11-21T17:46:48.647+0100] {dag.py:3239} INFO - Sync 1 DAGs
+[2024-11-21T17:46:48.653+0100] {logging_mixin.py:190} INFO - [2024-11-21T17:46:48.653+0100] {dag.py:4180} INFO - Setting next_dagrun for tutorial_taskflow_api to None, run_after=None
+[2024-11-21T17:46:48.665+0100] {processor.py:208} INFO - Processing /Users/jobandtalent/opt/anaconda3/envs/e2s-env/lib/python3.9/site-packages/airflow/example_dags/tutorial_taskflow_api.py took 0.122 seconds

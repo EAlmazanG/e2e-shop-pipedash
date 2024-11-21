@@ -23,3 +23,8 @@
 [2024-11-21T17:43:40.596+0100] {logging_mixin.py:190} INFO - [2024-11-21T17:43:40.596+0100] {dagbag.py:588} INFO - Filling up the DagBag from /Users/jobandtalent/opt/anaconda3/envs/e2s-env/lib/python3.9/site-packages/airflow/example_dags/plugins/workday.py
 [2024-11-21T17:43:41.399+0100] {processor.py:927} WARNING - No viable dags retrieved from /Users/jobandtalent/opt/anaconda3/envs/e2s-env/lib/python3.9/site-packages/airflow/example_dags/plugins/workday.py
 [2024-11-21T17:43:41.462+0100] {processor.py:208} INFO - Processing /Users/jobandtalent/opt/anaconda3/envs/e2s-env/lib/python3.9/site-packages/airflow/example_dags/plugins/workday.py took 0.879 seconds
+[2024-11-21T17:46:30.490+0100] {processor.py:186} INFO - Started process (PID=4167) to work on /Users/jobandtalent/opt/anaconda3/envs/e2s-env/lib/python3.9/site-packages/airflow/example_dags/plugins/workday.py
+[2024-11-21T17:46:30.491+0100] {processor.py:914} INFO - Processing file /Users/jobandtalent/opt/anaconda3/envs/e2s-env/lib/python3.9/site-packages/airflow/example_dags/plugins/workday.py for tasks to queue
+[2024-11-21T17:46:30.492+0100] {logging_mixin.py:190} INFO - [2024-11-21T17:46:30.492+0100] {dagbag.py:588} INFO - Filling up the DagBag from /Users/jobandtalent/opt/anaconda3/envs/e2s-env/lib/python3.9/site-packages/airflow/example_dags/plugins/workday.py
+[2024-11-21T17:46:31.379+0100] {processor.py:927} WARNING - No viable dags retrieved from /Users/jobandtalent/opt/anaconda3/envs/e2s-env/lib/python3.9/site-packages/airflow/example_dags/plugins/workday.py
+[2024-11-21T17:46:31.450+0100] {processor.py:208} INFO - Processing /Users/jobandtalent/opt/anaconda3/envs/e2s-env/lib/python3.9/site-packages/airflow/example_dags/plugins/workday.py took 0.968 seconds
