@@ -27,3 +27,17 @@
 [2024-11-21T17:46:21.157+0100] {logging_mixin.py:190} INFO - [2024-11-21T17:46:21.156+0100] {dag.py:3239} INFO - Sync 1 DAGs
 [2024-11-21T17:46:21.168+0100] {logging_mixin.py:190} INFO - [2024-11-21T17:46:21.168+0100] {dag.py:4180} INFO - Setting next_dagrun for example_bash_operator to 2024-11-20 00:00:00+00:00, run_after=2024-11-21 00:00:00+00:00
 [2024-11-21T17:46:21.180+0100] {processor.py:208} INFO - Processing /Users/jobandtalent/opt/anaconda3/envs/e2s-env/lib/python3.9/site-packages/airflow/example_dags/example_bash_operator.py took 0.121 seconds
+[2024-11-21T17:51:28.773+0100] {processor.py:186} INFO - Started process (PID=5073) to work on /Users/jobandtalent/opt/anaconda3/envs/e2s-env/lib/python3.9/site-packages/airflow/example_dags/example_bash_operator.py
+[2024-11-21T17:51:28.775+0100] {processor.py:914} INFO - Processing file /Users/jobandtalent/opt/anaconda3/envs/e2s-env/lib/python3.9/site-packages/airflow/example_dags/example_bash_operator.py for tasks to queue
+[2024-11-21T17:51:28.776+0100] {logging_mixin.py:190} INFO - [2024-11-21T17:51:28.776+0100] {dagbag.py:588} INFO - Filling up the DagBag from /Users/jobandtalent/opt/anaconda3/envs/e2s-env/lib/python3.9/site-packages/airflow/example_dags/example_bash_operator.py
+[2024-11-21T17:51:28.785+0100] {processor.py:925} INFO - DAG(s) 'example_bash_operator' retrieved from /Users/jobandtalent/opt/anaconda3/envs/e2s-env/lib/python3.9/site-packages/airflow/example_dags/example_bash_operator.py
+[2024-11-21T17:51:28.847+0100] {logging_mixin.py:190} INFO - [2024-11-21T17:51:28.847+0100] {dag.py:3239} INFO - Sync 1 DAGs
+[2024-11-21T17:51:28.858+0100] {logging_mixin.py:190} INFO - [2024-11-21T17:51:28.858+0100] {dag.py:4180} INFO - Setting next_dagrun for example_bash_operator to 2024-11-20 00:00:00+00:00, run_after=2024-11-21 00:00:00+00:00
+[2024-11-21T17:51:28.870+0100] {processor.py:208} INFO - Processing /Users/jobandtalent/opt/anaconda3/envs/e2s-env/lib/python3.9/site-packages/airflow/example_dags/example_bash_operator.py took 0.111 seconds
+[2024-11-21T17:56:10.995+0100] {processor.py:186} INFO - Started process (PID=5803) to work on /Users/jobandtalent/opt/anaconda3/envs/e2s-env/lib/python3.9/site-packages/airflow/example_dags/example_bash_operator.py
+[2024-11-21T17:56:10.997+0100] {processor.py:914} INFO - Processing file /Users/jobandtalent/opt/anaconda3/envs/e2s-env/lib/python3.9/site-packages/airflow/example_dags/example_bash_operator.py for tasks to queue
+[2024-11-21T17:56:10.997+0100] {logging_mixin.py:190} INFO - [2024-11-21T17:56:10.997+0100] {dagbag.py:588} INFO - Filling up the DagBag from /Users/jobandtalent/opt/anaconda3/envs/e2s-env/lib/python3.9/site-packages/airflow/example_dags/example_bash_operator.py
+[2024-11-21T17:56:11.008+0100] {processor.py:925} INFO - DAG(s) 'example_bash_operator' retrieved from /Users/jobandtalent/opt/anaconda3/envs/e2s-env/lib/python3.9/site-packages/airflow/example_dags/example_bash_operator.py
+[2024-11-21T17:56:11.072+0100] {logging_mixin.py:190} INFO - [2024-11-21T17:56:11.071+0100] {dag.py:3239} INFO - Sync 1 DAGs
+[2024-11-21T17:56:11.082+0100] {logging_mixin.py:190} INFO - [2024-11-21T17:56:11.082+0100] {dag.py:4180} INFO - Setting next_dagrun for example_bash_operator to 2024-11-20 00:00:00+00:00, run_after=2024-11-21 00:00:00+00:00
+[2024-11-21T17:56:11.092+0100] {processor.py:208} INFO - Processing /Users/jobandtalent/opt/anaconda3/envs/e2s-env/lib/python3.9/site-packages/airflow/example_dags/example_bash_operator.py took 0.109 seconds

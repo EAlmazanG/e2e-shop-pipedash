@@ -27,3 +27,17 @@
 [2024-11-21T17:45:48.372+0100] {logging_mixin.py:190} INFO - [2024-11-21T17:45:48.372+0100] {dag.py:3239} INFO - Sync 1 DAGs
 [2024-11-21T17:45:48.380+0100] {logging_mixin.py:190} INFO - [2024-11-21T17:45:48.379+0100] {dag.py:4180} INFO - Setting next_dagrun for example_complex to None, run_after=None
 [2024-11-21T17:45:48.393+0100] {processor.py:208} INFO - Processing /Users/jobandtalent/opt/anaconda3/envs/e2s-env/lib/python3.9/site-packages/airflow/example_dags/example_complex.py took 0.130 seconds
+[2024-11-21T17:48:57.743+0100] {processor.py:186} INFO - Started process (PID=4701) to work on /Users/jobandtalent/opt/anaconda3/envs/e2s-env/lib/python3.9/site-packages/airflow/example_dags/example_complex.py
+[2024-11-21T17:48:57.746+0100] {processor.py:914} INFO - Processing file /Users/jobandtalent/opt/anaconda3/envs/e2s-env/lib/python3.9/site-packages/airflow/example_dags/example_complex.py for tasks to queue
+[2024-11-21T17:48:57.746+0100] {logging_mixin.py:190} INFO - [2024-11-21T17:48:57.746+0100] {dagbag.py:588} INFO - Filling up the DagBag from /Users/jobandtalent/opt/anaconda3/envs/e2s-env/lib/python3.9/site-packages/airflow/example_dags/example_complex.py
+[2024-11-21T17:48:57.757+0100] {processor.py:925} INFO - DAG(s) 'example_complex' retrieved from /Users/jobandtalent/opt/anaconda3/envs/e2s-env/lib/python3.9/site-packages/airflow/example_dags/example_complex.py
+[2024-11-21T17:48:57.836+0100] {logging_mixin.py:190} INFO - [2024-11-21T17:48:57.836+0100] {dag.py:3239} INFO - Sync 1 DAGs
+[2024-11-21T17:48:57.842+0100] {logging_mixin.py:190} INFO - [2024-11-21T17:48:57.842+0100] {dag.py:4180} INFO - Setting next_dagrun for example_complex to None, run_after=None
+[2024-11-21T17:48:57.856+0100] {processor.py:208} INFO - Processing /Users/jobandtalent/opt/anaconda3/envs/e2s-env/lib/python3.9/site-packages/airflow/example_dags/example_complex.py took 0.122 seconds
+[2024-11-21T17:53:51.333+0100] {processor.py:186} INFO - Started process (PID=5423) to work on /Users/jobandtalent/opt/anaconda3/envs/e2s-env/lib/python3.9/site-packages/airflow/example_dags/example_complex.py
+[2024-11-21T17:53:51.336+0100] {processor.py:914} INFO - Processing file /Users/jobandtalent/opt/anaconda3/envs/e2s-env/lib/python3.9/site-packages/airflow/example_dags/example_complex.py for tasks to queue
+[2024-11-21T17:53:51.337+0100] {logging_mixin.py:190} INFO - [2024-11-21T17:53:51.337+0100] {dagbag.py:588} INFO - Filling up the DagBag from /Users/jobandtalent/opt/anaconda3/envs/e2s-env/lib/python3.9/site-packages/airflow/example_dags/example_complex.py
+[2024-11-21T17:53:51.353+0100] {processor.py:925} INFO - DAG(s) 'example_complex' retrieved from /Users/jobandtalent/opt/anaconda3/envs/e2s-env/lib/python3.9/site-packages/airflow/example_dags/example_complex.py
+[2024-11-21T17:53:51.422+0100] {logging_mixin.py:190} INFO - [2024-11-21T17:53:51.422+0100] {dag.py:3239} INFO - Sync 1 DAGs
+[2024-11-21T17:53:51.429+0100] {logging_mixin.py:190} INFO - [2024-11-21T17:53:51.429+0100] {dag.py:4180} INFO - Setting next_dagrun for example_complex to None, run_after=None
+[2024-11-21T17:53:51.442+0100] {processor.py:208} INFO - Processing /Users/jobandtalent/opt/anaconda3/envs/e2s-env/lib/python3.9/site-packages/airflow/example_dags/example_complex.py took 0.117 seconds
