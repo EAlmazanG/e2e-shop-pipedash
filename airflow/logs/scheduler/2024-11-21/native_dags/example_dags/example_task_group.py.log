@@ -1,0 +1,43 @@
+[2024-11-21T17:34:25.957+0100] {processor.py:186} INFO - Started process (PID=2129) to work on /Users/jobandtalent/opt/anaconda3/envs/e2s-env/lib/python3.9/site-packages/airflow/example_dags/example_task_group.py
+[2024-11-21T17:34:25.958+0100] {processor.py:914} INFO - Processing file /Users/jobandtalent/opt/anaconda3/envs/e2s-env/lib/python3.9/site-packages/airflow/example_dags/example_task_group.py for tasks to queue
+[2024-11-21T17:34:25.959+0100] {logging_mixin.py:190} INFO - [2024-11-21T17:34:25.959+0100] {dagbag.py:588} INFO - Filling up the DagBag from /Users/jobandtalent/opt/anaconda3/envs/e2s-env/lib/python3.9/site-packages/airflow/example_dags/example_task_group.py
+[2024-11-21T17:34:25.969+0100] {processor.py:925} INFO - DAG(s) 'example_task_group' retrieved from /Users/jobandtalent/opt/anaconda3/envs/e2s-env/lib/python3.9/site-packages/airflow/example_dags/example_task_group.py
+[2024-11-21T17:34:26.101+0100] {logging_mixin.py:190} INFO - [2024-11-21T17:34:26.100+0100] {override.py:1911} INFO - Created Permission View: can edit on DAG:example_task_group
+[2024-11-21T17:34:26.105+0100] {logging_mixin.py:190} INFO - [2024-11-21T17:34:26.105+0100] {override.py:1911} INFO - Created Permission View: can delete on DAG:example_task_group
+[2024-11-21T17:34:26.108+0100] {logging_mixin.py:190} INFO - [2024-11-21T17:34:26.108+0100] {override.py:1911} INFO - Created Permission View: can read on DAG:example_task_group
+[2024-11-21T17:34:26.113+0100] {logging_mixin.py:190} INFO - [2024-11-21T17:34:26.112+0100] {override.py:1911} INFO - Created Permission View: can delete on DAG Run:example_task_group
+[2024-11-21T17:34:26.116+0100] {logging_mixin.py:190} INFO - [2024-11-21T17:34:26.115+0100] {override.py:1911} INFO - Created Permission View: can create on DAG Run:example_task_group
+[2024-11-21T17:34:26.119+0100] {logging_mixin.py:190} INFO - [2024-11-21T17:34:26.119+0100] {override.py:1911} INFO - Created Permission View: menu access on DAG Run:example_task_group
+[2024-11-21T17:34:26.123+0100] {logging_mixin.py:190} INFO - [2024-11-21T17:34:26.123+0100] {override.py:1911} INFO - Created Permission View: can read on DAG Run:example_task_group
+[2024-11-21T17:34:26.123+0100] {logging_mixin.py:190} INFO - [2024-11-21T17:34:26.123+0100] {dag.py:3239} INFO - Sync 1 DAGs
+[2024-11-21T17:34:26.130+0100] {logging_mixin.py:190} INFO - [2024-11-21T17:34:26.130+0100] {dag.py:3262} INFO - Creating ORM DAG for example_task_group
+[2024-11-21T17:34:26.130+0100] {logging_mixin.py:190} INFO - [2024-11-21T17:34:26.130+0100] {dag.py:4180} INFO - Setting next_dagrun for example_task_group to None, run_after=None
+[2024-11-21T17:34:26.140+0100] {processor.py:208} INFO - Processing /Users/jobandtalent/opt/anaconda3/envs/e2s-env/lib/python3.9/site-packages/airflow/example_dags/example_task_group.py took 0.194 seconds
+[2024-11-21T17:37:22.522+0100] {processor.py:186} INFO - Started process (PID=2545) to work on /Users/jobandtalent/opt/anaconda3/envs/e2s-env/lib/python3.9/site-packages/airflow/example_dags/example_task_group.py
+[2024-11-21T17:37:22.525+0100] {processor.py:914} INFO - Processing file /Users/jobandtalent/opt/anaconda3/envs/e2s-env/lib/python3.9/site-packages/airflow/example_dags/example_task_group.py for tasks to queue
+[2024-11-21T17:37:22.526+0100] {logging_mixin.py:190} INFO - [2024-11-21T17:37:22.526+0100] {dagbag.py:588} INFO - Filling up the DagBag from /Users/jobandtalent/opt/anaconda3/envs/e2s-env/lib/python3.9/site-packages/airflow/example_dags/example_task_group.py
+[2024-11-21T17:37:22.537+0100] {processor.py:925} INFO - DAG(s) 'example_task_group' retrieved from /Users/jobandtalent/opt/anaconda3/envs/e2s-env/lib/python3.9/site-packages/airflow/example_dags/example_task_group.py
+[2024-11-21T17:37:22.604+0100] {logging_mixin.py:190} INFO - [2024-11-21T17:37:22.604+0100] {dag.py:3239} INFO - Sync 1 DAGs
+[2024-11-21T17:37:22.610+0100] {logging_mixin.py:190} INFO - [2024-11-21T17:37:22.610+0100] {dag.py:4180} INFO - Setting next_dagrun for example_task_group to None, run_after=None
+[2024-11-21T17:37:22.625+0100] {processor.py:208} INFO - Processing /Users/jobandtalent/opt/anaconda3/envs/e2s-env/lib/python3.9/site-packages/airflow/example_dags/example_task_group.py took 0.111 seconds
+[2024-11-21T17:39:45.985+0100] {processor.py:186} INFO - Started process (PID=2900) to work on /Users/jobandtalent/opt/anaconda3/envs/e2s-env/lib/python3.9/site-packages/airflow/example_dags/example_task_group.py
+[2024-11-21T17:39:45.986+0100] {processor.py:914} INFO - Processing file /Users/jobandtalent/opt/anaconda3/envs/e2s-env/lib/python3.9/site-packages/airflow/example_dags/example_task_group.py for tasks to queue
+[2024-11-21T17:39:45.987+0100] {logging_mixin.py:190} INFO - [2024-11-21T17:39:45.987+0100] {dagbag.py:588} INFO - Filling up the DagBag from /Users/jobandtalent/opt/anaconda3/envs/e2s-env/lib/python3.9/site-packages/airflow/example_dags/example_task_group.py
+[2024-11-21T17:39:45.999+0100] {processor.py:925} INFO - DAG(s) 'example_task_group' retrieved from /Users/jobandtalent/opt/anaconda3/envs/e2s-env/lib/python3.9/site-packages/airflow/example_dags/example_task_group.py
+[2024-11-21T17:39:46.065+0100] {logging_mixin.py:190} INFO - [2024-11-21T17:39:46.065+0100] {dag.py:3239} INFO - Sync 1 DAGs
+[2024-11-21T17:39:46.071+0100] {logging_mixin.py:190} INFO - [2024-11-21T17:39:46.071+0100] {dag.py:4180} INFO - Setting next_dagrun for example_task_group to None, run_after=None
+[2024-11-21T17:39:46.085+0100] {processor.py:208} INFO - Processing /Users/jobandtalent/opt/anaconda3/envs/e2s-env/lib/python3.9/site-packages/airflow/example_dags/example_task_group.py took 0.103 seconds
+[2024-11-21T17:42:06.628+0100] {processor.py:186} INFO - Started process (PID=3260) to work on /Users/jobandtalent/opt/anaconda3/envs/e2s-env/lib/python3.9/site-packages/airflow/example_dags/example_task_group.py
+[2024-11-21T17:42:06.631+0100] {processor.py:914} INFO - Processing file /Users/jobandtalent/opt/anaconda3/envs/e2s-env/lib/python3.9/site-packages/airflow/example_dags/example_task_group.py for tasks to queue
+[2024-11-21T17:42:06.631+0100] {logging_mixin.py:190} INFO - [2024-11-21T17:42:06.631+0100] {dagbag.py:588} INFO - Filling up the DagBag from /Users/jobandtalent/opt/anaconda3/envs/e2s-env/lib/python3.9/site-packages/airflow/example_dags/example_task_group.py
+[2024-11-21T17:42:06.640+0100] {processor.py:925} INFO - DAG(s) 'example_task_group' retrieved from /Users/jobandtalent/opt/anaconda3/envs/e2s-env/lib/python3.9/site-packages/airflow/example_dags/example_task_group.py
+[2024-11-21T17:42:06.737+0100] {logging_mixin.py:190} INFO - [2024-11-21T17:42:06.737+0100] {dag.py:3239} INFO - Sync 1 DAGs
+[2024-11-21T17:42:06.747+0100] {logging_mixin.py:190} INFO - [2024-11-21T17:42:06.747+0100] {dag.py:4180} INFO - Setting next_dagrun for example_task_group to None, run_after=None
+[2024-11-21T17:42:06.764+0100] {processor.py:208} INFO - Processing /Users/jobandtalent/opt/anaconda3/envs/e2s-env/lib/python3.9/site-packages/airflow/example_dags/example_task_group.py took 0.145 seconds
+[2024-11-21T17:44:35.587+0100] {processor.py:186} INFO - Started process (PID=3617) to work on /Users/jobandtalent/opt/anaconda3/envs/e2s-env/lib/python3.9/site-packages/airflow/example_dags/example_task_group.py
+[2024-11-21T17:44:35.589+0100] {processor.py:914} INFO - Processing file /Users/jobandtalent/opt/anaconda3/envs/e2s-env/lib/python3.9/site-packages/airflow/example_dags/example_task_group.py for tasks to queue
+[2024-11-21T17:44:35.590+0100] {logging_mixin.py:190} INFO - [2024-11-21T17:44:35.590+0100] {dagbag.py:588} INFO - Filling up the DagBag from /Users/jobandtalent/opt/anaconda3/envs/e2s-env/lib/python3.9/site-packages/airflow/example_dags/example_task_group.py
+[2024-11-21T17:44:35.600+0100] {processor.py:925} INFO - DAG(s) 'example_task_group' retrieved from /Users/jobandtalent/opt/anaconda3/envs/e2s-env/lib/python3.9/site-packages/airflow/example_dags/example_task_group.py
+[2024-11-21T17:44:35.669+0100] {logging_mixin.py:190} INFO - [2024-11-21T17:44:35.669+0100] {dag.py:3239} INFO - Sync 1 DAGs
+[2024-11-21T17:44:35.675+0100] {logging_mixin.py:190} INFO - [2024-11-21T17:44:35.675+0100] {dag.py:4180} INFO - Setting next_dagrun for example_task_group to None, run_after=None
+[2024-11-21T17:44:35.691+0100] {processor.py:208} INFO - Processing /Users/jobandtalent/opt/anaconda3/envs/e2s-env/lib/python3.9/site-packages/airflow/example_dags/example_task_group.py took 0.117 seconds

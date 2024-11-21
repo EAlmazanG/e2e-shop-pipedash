@@ -1,0 +1,43 @@
+[2024-11-21T17:34:50.257+0100] {processor.py:186} INFO - Started process (PID=2186) to work on /Users/jobandtalent/opt/anaconda3/envs/e2s-env/lib/python3.9/site-packages/airflow/example_dags/example_sensors.py
+[2024-11-21T17:34:50.258+0100] {processor.py:914} INFO - Processing file /Users/jobandtalent/opt/anaconda3/envs/e2s-env/lib/python3.9/site-packages/airflow/example_dags/example_sensors.py for tasks to queue
+[2024-11-21T17:34:50.259+0100] {logging_mixin.py:190} INFO - [2024-11-21T17:34:50.259+0100] {dagbag.py:588} INFO - Filling up the DagBag from /Users/jobandtalent/opt/anaconda3/envs/e2s-env/lib/python3.9/site-packages/airflow/example_dags/example_sensors.py
+[2024-11-21T17:34:50.272+0100] {processor.py:925} INFO - DAG(s) 'example_sensors' retrieved from /Users/jobandtalent/opt/anaconda3/envs/e2s-env/lib/python3.9/site-packages/airflow/example_dags/example_sensors.py
+[2024-11-21T17:34:51.148+0100] {logging_mixin.py:190} INFO - [2024-11-21T17:34:51.147+0100] {override.py:1911} INFO - Created Permission View: can delete on DAG:example_sensors
+[2024-11-21T17:34:51.153+0100] {logging_mixin.py:190} INFO - [2024-11-21T17:34:51.153+0100] {override.py:1911} INFO - Created Permission View: can read on DAG:example_sensors
+[2024-11-21T17:34:51.156+0100] {logging_mixin.py:190} INFO - [2024-11-21T17:34:51.156+0100] {override.py:1911} INFO - Created Permission View: can edit on DAG:example_sensors
+[2024-11-21T17:34:51.160+0100] {logging_mixin.py:190} INFO - [2024-11-21T17:34:51.160+0100] {override.py:1911} INFO - Created Permission View: can create on DAG Run:example_sensors
+[2024-11-21T17:34:51.163+0100] {logging_mixin.py:190} INFO - [2024-11-21T17:34:51.163+0100] {override.py:1911} INFO - Created Permission View: can read on DAG Run:example_sensors
+[2024-11-21T17:34:51.166+0100] {logging_mixin.py:190} INFO - [2024-11-21T17:34:51.166+0100] {override.py:1911} INFO - Created Permission View: can delete on DAG Run:example_sensors
+[2024-11-21T17:34:51.169+0100] {logging_mixin.py:190} INFO - [2024-11-21T17:34:51.169+0100] {override.py:1911} INFO - Created Permission View: menu access on DAG Run:example_sensors
+[2024-11-21T17:34:51.170+0100] {logging_mixin.py:190} INFO - [2024-11-21T17:34:51.169+0100] {dag.py:3239} INFO - Sync 1 DAGs
+[2024-11-21T17:34:51.177+0100] {logging_mixin.py:190} INFO - [2024-11-21T17:34:51.177+0100] {dag.py:3262} INFO - Creating ORM DAG for example_sensors
+[2024-11-21T17:34:51.177+0100] {logging_mixin.py:190} INFO - [2024-11-21T17:34:51.177+0100] {dag.py:4180} INFO - Setting next_dagrun for example_sensors to None, run_after=None
+[2024-11-21T17:34:51.186+0100] {processor.py:208} INFO - Processing /Users/jobandtalent/opt/anaconda3/envs/e2s-env/lib/python3.9/site-packages/airflow/example_dags/example_sensors.py took 0.937 seconds
+[2024-11-21T17:37:44.536+0100] {processor.py:186} INFO - Started process (PID=2611) to work on /Users/jobandtalent/opt/anaconda3/envs/e2s-env/lib/python3.9/site-packages/airflow/example_dags/example_sensors.py
+[2024-11-21T17:37:44.537+0100] {processor.py:914} INFO - Processing file /Users/jobandtalent/opt/anaconda3/envs/e2s-env/lib/python3.9/site-packages/airflow/example_dags/example_sensors.py for tasks to queue
+[2024-11-21T17:37:44.538+0100] {logging_mixin.py:190} INFO - [2024-11-21T17:37:44.538+0100] {dagbag.py:588} INFO - Filling up the DagBag from /Users/jobandtalent/opt/anaconda3/envs/e2s-env/lib/python3.9/site-packages/airflow/example_dags/example_sensors.py
+[2024-11-21T17:37:44.553+0100] {processor.py:925} INFO - DAG(s) 'example_sensors' retrieved from /Users/jobandtalent/opt/anaconda3/envs/e2s-env/lib/python3.9/site-packages/airflow/example_dags/example_sensors.py
+[2024-11-21T17:37:45.368+0100] {logging_mixin.py:190} INFO - [2024-11-21T17:37:45.367+0100] {dag.py:3239} INFO - Sync 1 DAGs
+[2024-11-21T17:37:45.374+0100] {logging_mixin.py:190} INFO - [2024-11-21T17:37:45.374+0100] {dag.py:4180} INFO - Setting next_dagrun for example_sensors to None, run_after=None
+[2024-11-21T17:37:45.386+0100] {processor.py:208} INFO - Processing /Users/jobandtalent/opt/anaconda3/envs/e2s-env/lib/python3.9/site-packages/airflow/example_dags/example_sensors.py took 0.852 seconds
+[2024-11-21T17:40:12.636+0100] {processor.py:186} INFO - Started process (PID=2969) to work on /Users/jobandtalent/opt/anaconda3/envs/e2s-env/lib/python3.9/site-packages/airflow/example_dags/example_sensors.py
+[2024-11-21T17:40:12.638+0100] {processor.py:914} INFO - Processing file /Users/jobandtalent/opt/anaconda3/envs/e2s-env/lib/python3.9/site-packages/airflow/example_dags/example_sensors.py for tasks to queue
+[2024-11-21T17:40:12.639+0100] {logging_mixin.py:190} INFO - [2024-11-21T17:40:12.639+0100] {dagbag.py:588} INFO - Filling up the DagBag from /Users/jobandtalent/opt/anaconda3/envs/e2s-env/lib/python3.9/site-packages/airflow/example_dags/example_sensors.py
+[2024-11-21T17:40:12.652+0100] {processor.py:925} INFO - DAG(s) 'example_sensors' retrieved from /Users/jobandtalent/opt/anaconda3/envs/e2s-env/lib/python3.9/site-packages/airflow/example_dags/example_sensors.py
+[2024-11-21T17:40:13.527+0100] {logging_mixin.py:190} INFO - [2024-11-21T17:40:13.527+0100] {dag.py:3239} INFO - Sync 1 DAGs
+[2024-11-21T17:40:13.533+0100] {logging_mixin.py:190} INFO - [2024-11-21T17:40:13.533+0100] {dag.py:4180} INFO - Setting next_dagrun for example_sensors to None, run_after=None
+[2024-11-21T17:40:13.544+0100] {processor.py:208} INFO - Processing /Users/jobandtalent/opt/anaconda3/envs/e2s-env/lib/python3.9/site-packages/airflow/example_dags/example_sensors.py took 0.920 seconds
+[2024-11-21T17:42:31.784+0100] {processor.py:186} INFO - Started process (PID=3325) to work on /Users/jobandtalent/opt/anaconda3/envs/e2s-env/lib/python3.9/site-packages/airflow/example_dags/example_sensors.py
+[2024-11-21T17:42:31.785+0100] {processor.py:914} INFO - Processing file /Users/jobandtalent/opt/anaconda3/envs/e2s-env/lib/python3.9/site-packages/airflow/example_dags/example_sensors.py for tasks to queue
+[2024-11-21T17:42:31.786+0100] {logging_mixin.py:190} INFO - [2024-11-21T17:42:31.786+0100] {dagbag.py:588} INFO - Filling up the DagBag from /Users/jobandtalent/opt/anaconda3/envs/e2s-env/lib/python3.9/site-packages/airflow/example_dags/example_sensors.py
+[2024-11-21T17:42:31.803+0100] {processor.py:925} INFO - DAG(s) 'example_sensors' retrieved from /Users/jobandtalent/opt/anaconda3/envs/e2s-env/lib/python3.9/site-packages/airflow/example_dags/example_sensors.py
+[2024-11-21T17:42:32.549+0100] {logging_mixin.py:190} INFO - [2024-11-21T17:42:32.548+0100] {dag.py:3239} INFO - Sync 1 DAGs
+[2024-11-21T17:42:32.555+0100] {logging_mixin.py:190} INFO - [2024-11-21T17:42:32.554+0100] {dag.py:4180} INFO - Setting next_dagrun for example_sensors to None, run_after=None
+[2024-11-21T17:42:32.567+0100] {processor.py:208} INFO - Processing /Users/jobandtalent/opt/anaconda3/envs/e2s-env/lib/python3.9/site-packages/airflow/example_dags/example_sensors.py took 0.794 seconds
+[2024-11-21T17:45:05.416+0100] {processor.py:186} INFO - Started process (PID=3695) to work on /Users/jobandtalent/opt/anaconda3/envs/e2s-env/lib/python3.9/site-packages/airflow/example_dags/example_sensors.py
+[2024-11-21T17:45:05.419+0100] {processor.py:914} INFO - Processing file /Users/jobandtalent/opt/anaconda3/envs/e2s-env/lib/python3.9/site-packages/airflow/example_dags/example_sensors.py for tasks to queue
+[2024-11-21T17:45:05.420+0100] {logging_mixin.py:190} INFO - [2024-11-21T17:45:05.420+0100] {dagbag.py:588} INFO - Filling up the DagBag from /Users/jobandtalent/opt/anaconda3/envs/e2s-env/lib/python3.9/site-packages/airflow/example_dags/example_sensors.py
+[2024-11-21T17:45:05.434+0100] {processor.py:925} INFO - DAG(s) 'example_sensors' retrieved from /Users/jobandtalent/opt/anaconda3/envs/e2s-env/lib/python3.9/site-packages/airflow/example_dags/example_sensors.py
+[2024-11-21T17:45:06.250+0100] {logging_mixin.py:190} INFO - [2024-11-21T17:45:06.249+0100] {dag.py:3239} INFO - Sync 1 DAGs
+[2024-11-21T17:45:06.256+0100] {logging_mixin.py:190} INFO - [2024-11-21T17:45:06.256+0100] {dag.py:4180} INFO - Setting next_dagrun for example_sensors to None, run_after=None
+[2024-11-21T17:45:06.269+0100] {processor.py:208} INFO - Processing /Users/jobandtalent/opt/anaconda3/envs/e2s-env/lib/python3.9/site-packages/airflow/example_dags/example_sensors.py took 0.862 seconds

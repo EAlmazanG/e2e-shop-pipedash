@@ -1,0 +1,43 @@
+[2024-11-21T17:34:07.255+0100] {processor.py:186} INFO - Started process (PID=2077) to work on /Users/jobandtalent/opt/anaconda3/envs/e2s-env/lib/python3.9/site-packages/airflow/example_dags/example_xcom.py
+[2024-11-21T17:34:07.256+0100] {processor.py:914} INFO - Processing file /Users/jobandtalent/opt/anaconda3/envs/e2s-env/lib/python3.9/site-packages/airflow/example_dags/example_xcom.py for tasks to queue
+[2024-11-21T17:34:07.256+0100] {logging_mixin.py:190} INFO - [2024-11-21T17:34:07.256+0100] {dagbag.py:588} INFO - Filling up the DagBag from /Users/jobandtalent/opt/anaconda3/envs/e2s-env/lib/python3.9/site-packages/airflow/example_dags/example_xcom.py
+[2024-11-21T17:34:07.286+0100] {processor.py:925} INFO - DAG(s) 'example_xcom' retrieved from /Users/jobandtalent/opt/anaconda3/envs/e2s-env/lib/python3.9/site-packages/airflow/example_dags/example_xcom.py
+[2024-11-21T17:34:07.415+0100] {logging_mixin.py:190} INFO - [2024-11-21T17:34:07.414+0100] {override.py:1911} INFO - Created Permission View: can edit on DAG:example_xcom
+[2024-11-21T17:34:07.419+0100] {logging_mixin.py:190} INFO - [2024-11-21T17:34:07.419+0100] {override.py:1911} INFO - Created Permission View: can delete on DAG:example_xcom
+[2024-11-21T17:34:07.423+0100] {logging_mixin.py:190} INFO - [2024-11-21T17:34:07.422+0100] {override.py:1911} INFO - Created Permission View: can read on DAG:example_xcom
+[2024-11-21T17:34:07.427+0100] {logging_mixin.py:190} INFO - [2024-11-21T17:34:07.427+0100] {override.py:1911} INFO - Created Permission View: can delete on DAG Run:example_xcom
+[2024-11-21T17:34:07.430+0100] {logging_mixin.py:190} INFO - [2024-11-21T17:34:07.430+0100] {override.py:1911} INFO - Created Permission View: menu access on DAG Run:example_xcom
+[2024-11-21T17:34:07.433+0100] {logging_mixin.py:190} INFO - [2024-11-21T17:34:07.433+0100] {override.py:1911} INFO - Created Permission View: can create on DAG Run:example_xcom
+[2024-11-21T17:34:07.436+0100] {logging_mixin.py:190} INFO - [2024-11-21T17:34:07.436+0100] {override.py:1911} INFO - Created Permission View: can read on DAG Run:example_xcom
+[2024-11-21T17:34:07.436+0100] {logging_mixin.py:190} INFO - [2024-11-21T17:34:07.436+0100] {dag.py:3239} INFO - Sync 1 DAGs
+[2024-11-21T17:34:07.443+0100] {logging_mixin.py:190} INFO - [2024-11-21T17:34:07.443+0100] {dag.py:3262} INFO - Creating ORM DAG for example_xcom
+[2024-11-21T17:34:07.447+0100] {logging_mixin.py:190} INFO - [2024-11-21T17:34:07.447+0100] {dag.py:4180} INFO - Setting next_dagrun for example_xcom to 2021-01-01 00:00:00+00:00, run_after=2021-01-01 00:00:00+00:00
+[2024-11-21T17:34:07.457+0100] {processor.py:208} INFO - Processing /Users/jobandtalent/opt/anaconda3/envs/e2s-env/lib/python3.9/site-packages/airflow/example_dags/example_xcom.py took 0.212 seconds
+[2024-11-21T17:37:03.263+0100] {processor.py:186} INFO - Started process (PID=2502) to work on /Users/jobandtalent/opt/anaconda3/envs/e2s-env/lib/python3.9/site-packages/airflow/example_dags/example_xcom.py
+[2024-11-21T17:37:03.265+0100] {processor.py:914} INFO - Processing file /Users/jobandtalent/opt/anaconda3/envs/e2s-env/lib/python3.9/site-packages/airflow/example_dags/example_xcom.py for tasks to queue
+[2024-11-21T17:37:03.265+0100] {logging_mixin.py:190} INFO - [2024-11-21T17:37:03.265+0100] {dagbag.py:588} INFO - Filling up the DagBag from /Users/jobandtalent/opt/anaconda3/envs/e2s-env/lib/python3.9/site-packages/airflow/example_dags/example_xcom.py
+[2024-11-21T17:37:03.297+0100] {processor.py:925} INFO - DAG(s) 'example_xcom' retrieved from /Users/jobandtalent/opt/anaconda3/envs/e2s-env/lib/python3.9/site-packages/airflow/example_dags/example_xcom.py
+[2024-11-21T17:37:03.356+0100] {logging_mixin.py:190} INFO - [2024-11-21T17:37:03.356+0100] {dag.py:3239} INFO - Sync 1 DAGs
+[2024-11-21T17:37:03.367+0100] {logging_mixin.py:190} INFO - [2024-11-21T17:37:03.367+0100] {dag.py:4180} INFO - Setting next_dagrun for example_xcom to 2021-01-01 00:00:00+00:00, run_after=2021-01-01 00:00:00+00:00
+[2024-11-21T17:37:03.378+0100] {processor.py:208} INFO - Processing /Users/jobandtalent/opt/anaconda3/envs/e2s-env/lib/python3.9/site-packages/airflow/example_dags/example_xcom.py took 0.126 seconds
+[2024-11-21T17:39:25.060+0100] {processor.py:186} INFO - Started process (PID=2857) to work on /Users/jobandtalent/opt/anaconda3/envs/e2s-env/lib/python3.9/site-packages/airflow/example_dags/example_xcom.py
+[2024-11-21T17:39:25.063+0100] {processor.py:914} INFO - Processing file /Users/jobandtalent/opt/anaconda3/envs/e2s-env/lib/python3.9/site-packages/airflow/example_dags/example_xcom.py for tasks to queue
+[2024-11-21T17:39:25.064+0100] {logging_mixin.py:190} INFO - [2024-11-21T17:39:25.064+0100] {dagbag.py:588} INFO - Filling up the DagBag from /Users/jobandtalent/opt/anaconda3/envs/e2s-env/lib/python3.9/site-packages/airflow/example_dags/example_xcom.py
+[2024-11-21T17:39:25.101+0100] {processor.py:925} INFO - DAG(s) 'example_xcom' retrieved from /Users/jobandtalent/opt/anaconda3/envs/e2s-env/lib/python3.9/site-packages/airflow/example_dags/example_xcom.py
+[2024-11-21T17:39:25.166+0100] {logging_mixin.py:190} INFO - [2024-11-21T17:39:25.166+0100] {dag.py:3239} INFO - Sync 1 DAGs
+[2024-11-21T17:39:25.177+0100] {logging_mixin.py:190} INFO - [2024-11-21T17:39:25.177+0100] {dag.py:4180} INFO - Setting next_dagrun for example_xcom to 2021-01-01 00:00:00+00:00, run_after=2021-01-01 00:00:00+00:00
+[2024-11-21T17:39:25.189+0100] {processor.py:208} INFO - Processing /Users/jobandtalent/opt/anaconda3/envs/e2s-env/lib/python3.9/site-packages/airflow/example_dags/example_xcom.py took 0.136 seconds
+[2024-11-21T17:41:47.051+0100] {processor.py:186} INFO - Started process (PID=3210) to work on /Users/jobandtalent/opt/anaconda3/envs/e2s-env/lib/python3.9/site-packages/airflow/example_dags/example_xcom.py
+[2024-11-21T17:41:47.053+0100] {processor.py:914} INFO - Processing file /Users/jobandtalent/opt/anaconda3/envs/e2s-env/lib/python3.9/site-packages/airflow/example_dags/example_xcom.py for tasks to queue
+[2024-11-21T17:41:47.054+0100] {logging_mixin.py:190} INFO - [2024-11-21T17:41:47.054+0100] {dagbag.py:588} INFO - Filling up the DagBag from /Users/jobandtalent/opt/anaconda3/envs/e2s-env/lib/python3.9/site-packages/airflow/example_dags/example_xcom.py
+[2024-11-21T17:41:47.085+0100] {processor.py:925} INFO - DAG(s) 'example_xcom' retrieved from /Users/jobandtalent/opt/anaconda3/envs/e2s-env/lib/python3.9/site-packages/airflow/example_dags/example_xcom.py
+[2024-11-21T17:41:47.149+0100] {logging_mixin.py:190} INFO - [2024-11-21T17:41:47.148+0100] {dag.py:3239} INFO - Sync 1 DAGs
+[2024-11-21T17:41:47.159+0100] {logging_mixin.py:190} INFO - [2024-11-21T17:41:47.159+0100] {dag.py:4180} INFO - Setting next_dagrun for example_xcom to 2021-01-01 00:00:00+00:00, run_after=2021-01-01 00:00:00+00:00
+[2024-11-21T17:41:47.170+0100] {processor.py:208} INFO - Processing /Users/jobandtalent/opt/anaconda3/envs/e2s-env/lib/python3.9/site-packages/airflow/example_dags/example_xcom.py took 0.132 seconds
+[2024-11-21T17:44:14.642+0100] {processor.py:186} INFO - Started process (PID=3567) to work on /Users/jobandtalent/opt/anaconda3/envs/e2s-env/lib/python3.9/site-packages/airflow/example_dags/example_xcom.py
+[2024-11-21T17:44:14.644+0100] {processor.py:914} INFO - Processing file /Users/jobandtalent/opt/anaconda3/envs/e2s-env/lib/python3.9/site-packages/airflow/example_dags/example_xcom.py for tasks to queue
+[2024-11-21T17:44:14.645+0100] {logging_mixin.py:190} INFO - [2024-11-21T17:44:14.644+0100] {dagbag.py:588} INFO - Filling up the DagBag from /Users/jobandtalent/opt/anaconda3/envs/e2s-env/lib/python3.9/site-packages/airflow/example_dags/example_xcom.py
+[2024-11-21T17:44:14.672+0100] {processor.py:925} INFO - DAG(s) 'example_xcom' retrieved from /Users/jobandtalent/opt/anaconda3/envs/e2s-env/lib/python3.9/site-packages/airflow/example_dags/example_xcom.py
+[2024-11-21T17:44:14.728+0100] {logging_mixin.py:190} INFO - [2024-11-21T17:44:14.728+0100] {dag.py:3239} INFO - Sync 1 DAGs
+[2024-11-21T17:44:14.737+0100] {logging_mixin.py:190} INFO - [2024-11-21T17:44:14.737+0100] {dag.py:4180} INFO - Setting next_dagrun for example_xcom to 2021-01-01 00:00:00+00:00, run_after=2021-01-01 00:00:00+00:00
+[2024-11-21T17:44:14.747+0100] {processor.py:208} INFO - Processing /Users/jobandtalent/opt/anaconda3/envs/e2s-env/lib/python3.9/site-packages/airflow/example_dags/example_xcom.py took 0.114 seconds

@@ -1,0 +1,29 @@
+[2024-11-21T17:35:59.877+0100] {processor.py:186} INFO - Started process (PID=2347) to work on /Users/jobandtalent/opt/anaconda3/envs/e2s-env/lib/python3.9/site-packages/airflow/example_dags/example_dag_decorator.py
+[2024-11-21T17:35:59.879+0100] {processor.py:914} INFO - Processing file /Users/jobandtalent/opt/anaconda3/envs/e2s-env/lib/python3.9/site-packages/airflow/example_dags/example_dag_decorator.py for tasks to queue
+[2024-11-21T17:35:59.880+0100] {logging_mixin.py:190} INFO - [2024-11-21T17:35:59.880+0100] {dagbag.py:588} INFO - Filling up the DagBag from /Users/jobandtalent/opt/anaconda3/envs/e2s-env/lib/python3.9/site-packages/airflow/example_dags/example_dag_decorator.py
+[2024-11-21T17:36:00.189+0100] {processor.py:925} INFO - DAG(s) 'example_dag_decorator' retrieved from /Users/jobandtalent/opt/anaconda3/envs/e2s-env/lib/python3.9/site-packages/airflow/example_dags/example_dag_decorator.py
+[2024-11-21T17:36:00.336+0100] {logging_mixin.py:190} INFO - [2024-11-21T17:36:00.336+0100] {override.py:1911} INFO - Created Permission View: can read on DAG:example_dag_decorator
+[2024-11-21T17:36:00.342+0100] {logging_mixin.py:190} INFO - [2024-11-21T17:36:00.342+0100] {override.py:1911} INFO - Created Permission View: can edit on DAG:example_dag_decorator
+[2024-11-21T17:36:00.347+0100] {logging_mixin.py:190} INFO - [2024-11-21T17:36:00.347+0100] {override.py:1911} INFO - Created Permission View: can delete on DAG:example_dag_decorator
+[2024-11-21T17:36:00.353+0100] {logging_mixin.py:190} INFO - [2024-11-21T17:36:00.353+0100] {override.py:1911} INFO - Created Permission View: can read on DAG Run:example_dag_decorator
+[2024-11-21T17:36:00.358+0100] {logging_mixin.py:190} INFO - [2024-11-21T17:36:00.358+0100] {override.py:1911} INFO - Created Permission View: can create on DAG Run:example_dag_decorator
+[2024-11-21T17:36:00.362+0100] {logging_mixin.py:190} INFO - [2024-11-21T17:36:00.362+0100] {override.py:1911} INFO - Created Permission View: can delete on DAG Run:example_dag_decorator
+[2024-11-21T17:36:00.368+0100] {logging_mixin.py:190} INFO - [2024-11-21T17:36:00.367+0100] {override.py:1911} INFO - Created Permission View: menu access on DAG Run:example_dag_decorator
+[2024-11-21T17:36:00.368+0100] {logging_mixin.py:190} INFO - [2024-11-21T17:36:00.368+0100] {dag.py:3239} INFO - Sync 1 DAGs
+[2024-11-21T17:36:00.376+0100] {logging_mixin.py:190} INFO - [2024-11-21T17:36:00.375+0100] {dag.py:3262} INFO - Creating ORM DAG for example_dag_decorator
+[2024-11-21T17:36:00.376+0100] {logging_mixin.py:190} INFO - [2024-11-21T17:36:00.376+0100] {dag.py:4180} INFO - Setting next_dagrun for example_dag_decorator to None, run_after=None
+[2024-11-21T17:36:00.390+0100] {processor.py:208} INFO - Processing /Users/jobandtalent/opt/anaconda3/envs/e2s-env/lib/python3.9/site-packages/airflow/example_dags/example_dag_decorator.py took 0.523 seconds
+[2024-11-21T17:40:44.792+0100] {processor.py:186} INFO - Started process (PID=3063) to work on /Users/jobandtalent/opt/anaconda3/envs/e2s-env/lib/python3.9/site-packages/airflow/example_dags/example_dag_decorator.py
+[2024-11-21T17:40:44.795+0100] {processor.py:914} INFO - Processing file /Users/jobandtalent/opt/anaconda3/envs/e2s-env/lib/python3.9/site-packages/airflow/example_dags/example_dag_decorator.py for tasks to queue
+[2024-11-21T17:40:44.795+0100] {logging_mixin.py:190} INFO - [2024-11-21T17:40:44.795+0100] {dagbag.py:588} INFO - Filling up the DagBag from /Users/jobandtalent/opt/anaconda3/envs/e2s-env/lib/python3.9/site-packages/airflow/example_dags/example_dag_decorator.py
+[2024-11-21T17:40:44.910+0100] {processor.py:925} INFO - DAG(s) 'example_dag_decorator' retrieved from /Users/jobandtalent/opt/anaconda3/envs/e2s-env/lib/python3.9/site-packages/airflow/example_dags/example_dag_decorator.py
+[2024-11-21T17:40:45.036+0100] {logging_mixin.py:190} INFO - [2024-11-21T17:40:45.035+0100] {dag.py:3239} INFO - Sync 1 DAGs
+[2024-11-21T17:40:45.041+0100] {logging_mixin.py:190} INFO - [2024-11-21T17:40:45.041+0100] {dag.py:4180} INFO - Setting next_dagrun for example_dag_decorator to None, run_after=None
+[2024-11-21T17:40:45.052+0100] {processor.py:208} INFO - Processing /Users/jobandtalent/opt/anaconda3/envs/e2s-env/lib/python3.9/site-packages/airflow/example_dags/example_dag_decorator.py took 0.271 seconds
+[2024-11-21T17:45:44.817+0100] {processor.py:186} INFO - Started process (PID=3908) to work on /Users/jobandtalent/opt/anaconda3/envs/e2s-env/lib/python3.9/site-packages/airflow/example_dags/example_dag_decorator.py
+[2024-11-21T17:45:44.819+0100] {processor.py:914} INFO - Processing file /Users/jobandtalent/opt/anaconda3/envs/e2s-env/lib/python3.9/site-packages/airflow/example_dags/example_dag_decorator.py for tasks to queue
+[2024-11-21T17:45:44.820+0100] {logging_mixin.py:190} INFO - [2024-11-21T17:45:44.820+0100] {dagbag.py:588} INFO - Filling up the DagBag from /Users/jobandtalent/opt/anaconda3/envs/e2s-env/lib/python3.9/site-packages/airflow/example_dags/example_dag_decorator.py
+[2024-11-21T17:45:44.971+0100] {processor.py:925} INFO - DAG(s) 'example_dag_decorator' retrieved from /Users/jobandtalent/opt/anaconda3/envs/e2s-env/lib/python3.9/site-packages/airflow/example_dags/example_dag_decorator.py
+[2024-11-21T17:45:45.255+0100] {logging_mixin.py:190} INFO - [2024-11-21T17:45:45.254+0100] {dag.py:3239} INFO - Sync 1 DAGs
+[2024-11-21T17:45:45.262+0100] {logging_mixin.py:190} INFO - [2024-11-21T17:45:45.262+0100] {dag.py:4180} INFO - Setting next_dagrun for example_dag_decorator to None, run_after=None
+[2024-11-21T17:45:45.284+0100] {processor.py:208} INFO - Processing /Users/jobandtalent/opt/anaconda3/envs/e2s-env/lib/python3.9/site-packages/airflow/example_dags/example_dag_decorator.py took 0.480 seconds

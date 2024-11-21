@@ -1,0 +1,43 @@
+[2024-11-21T17:34:32.115+0100] {processor.py:186} INFO - Started process (PID=2142) to work on /Users/jobandtalent/opt/anaconda3/envs/e2s-env/lib/python3.9/site-packages/airflow/example_dags/example_sla_dag.py
+[2024-11-21T17:34:32.116+0100] {processor.py:914} INFO - Processing file /Users/jobandtalent/opt/anaconda3/envs/e2s-env/lib/python3.9/site-packages/airflow/example_dags/example_sla_dag.py for tasks to queue
+[2024-11-21T17:34:32.117+0100] {logging_mixin.py:190} INFO - [2024-11-21T17:34:32.117+0100] {dagbag.py:588} INFO - Filling up the DagBag from /Users/jobandtalent/opt/anaconda3/envs/e2s-env/lib/python3.9/site-packages/airflow/example_dags/example_sla_dag.py
+[2024-11-21T17:34:32.170+0100] {processor.py:925} INFO - DAG(s) 'example_sla_dag' retrieved from /Users/jobandtalent/opt/anaconda3/envs/e2s-env/lib/python3.9/site-packages/airflow/example_dags/example_sla_dag.py
+[2024-11-21T17:34:32.327+0100] {logging_mixin.py:190} INFO - [2024-11-21T17:34:32.326+0100] {override.py:1911} INFO - Created Permission View: can edit on DAG:example_sla_dag
+[2024-11-21T17:34:32.332+0100] {logging_mixin.py:190} INFO - [2024-11-21T17:34:32.332+0100] {override.py:1911} INFO - Created Permission View: can delete on DAG:example_sla_dag
+[2024-11-21T17:34:32.336+0100] {logging_mixin.py:190} INFO - [2024-11-21T17:34:32.336+0100] {override.py:1911} INFO - Created Permission View: can read on DAG:example_sla_dag
+[2024-11-21T17:34:32.341+0100] {logging_mixin.py:190} INFO - [2024-11-21T17:34:32.341+0100] {override.py:1911} INFO - Created Permission View: can delete on DAG Run:example_sla_dag
+[2024-11-21T17:34:32.344+0100] {logging_mixin.py:190} INFO - [2024-11-21T17:34:32.344+0100] {override.py:1911} INFO - Created Permission View: menu access on DAG Run:example_sla_dag
+[2024-11-21T17:34:32.348+0100] {logging_mixin.py:190} INFO - [2024-11-21T17:34:32.348+0100] {override.py:1911} INFO - Created Permission View: can create on DAG Run:example_sla_dag
+[2024-11-21T17:34:32.351+0100] {logging_mixin.py:190} INFO - [2024-11-21T17:34:32.351+0100] {override.py:1911} INFO - Created Permission View: can read on DAG Run:example_sla_dag
+[2024-11-21T17:34:32.352+0100] {logging_mixin.py:190} INFO - [2024-11-21T17:34:32.351+0100] {dag.py:3239} INFO - Sync 1 DAGs
+[2024-11-21T17:34:32.359+0100] {logging_mixin.py:190} INFO - [2024-11-21T17:34:32.359+0100] {dag.py:3262} INFO - Creating ORM DAG for example_sla_dag
+[2024-11-21T17:34:32.366+0100] {logging_mixin.py:190} INFO - [2024-11-21T17:34:32.366+0100] {dag.py:4180} INFO - Setting next_dagrun for example_sla_dag to 2024-11-21 16:32:00+00:00, run_after=2024-11-21 16:34:00+00:00
+[2024-11-21T17:34:32.376+0100] {processor.py:208} INFO - Processing /Users/jobandtalent/opt/anaconda3/envs/e2s-env/lib/python3.9/site-packages/airflow/example_dags/example_sla_dag.py took 0.273 seconds
+[2024-11-21T17:37:29.316+0100] {processor.py:186} INFO - Started process (PID=2562) to work on /Users/jobandtalent/opt/anaconda3/envs/e2s-env/lib/python3.9/site-packages/airflow/example_dags/example_sla_dag.py
+[2024-11-21T17:37:29.319+0100] {processor.py:914} INFO - Processing file /Users/jobandtalent/opt/anaconda3/envs/e2s-env/lib/python3.9/site-packages/airflow/example_dags/example_sla_dag.py for tasks to queue
+[2024-11-21T17:37:29.320+0100] {logging_mixin.py:190} INFO - [2024-11-21T17:37:29.319+0100] {dagbag.py:588} INFO - Filling up the DagBag from /Users/jobandtalent/opt/anaconda3/envs/e2s-env/lib/python3.9/site-packages/airflow/example_dags/example_sla_dag.py
+[2024-11-21T17:37:29.358+0100] {processor.py:925} INFO - DAG(s) 'example_sla_dag' retrieved from /Users/jobandtalent/opt/anaconda3/envs/e2s-env/lib/python3.9/site-packages/airflow/example_dags/example_sla_dag.py
+[2024-11-21T17:37:29.420+0100] {logging_mixin.py:190} INFO - [2024-11-21T17:37:29.420+0100] {dag.py:3239} INFO - Sync 1 DAGs
+[2024-11-21T17:37:29.435+0100] {logging_mixin.py:190} INFO - [2024-11-21T17:37:29.435+0100] {dag.py:4180} INFO - Setting next_dagrun for example_sla_dag to 2024-11-21 16:34:00+00:00, run_after=2024-11-21 16:36:00+00:00
+[2024-11-21T17:37:29.448+0100] {processor.py:208} INFO - Processing /Users/jobandtalent/opt/anaconda3/envs/e2s-env/lib/python3.9/site-packages/airflow/example_dags/example_sla_dag.py took 0.138 seconds
+[2024-11-21T17:39:53.235+0100] {processor.py:186} INFO - Started process (PID=2924) to work on /Users/jobandtalent/opt/anaconda3/envs/e2s-env/lib/python3.9/site-packages/airflow/example_dags/example_sla_dag.py
+[2024-11-21T17:39:53.237+0100] {processor.py:914} INFO - Processing file /Users/jobandtalent/opt/anaconda3/envs/e2s-env/lib/python3.9/site-packages/airflow/example_dags/example_sla_dag.py for tasks to queue
+[2024-11-21T17:39:53.238+0100] {logging_mixin.py:190} INFO - [2024-11-21T17:39:53.238+0100] {dagbag.py:588} INFO - Filling up the DagBag from /Users/jobandtalent/opt/anaconda3/envs/e2s-env/lib/python3.9/site-packages/airflow/example_dags/example_sla_dag.py
+[2024-11-21T17:39:53.314+0100] {processor.py:925} INFO - DAG(s) 'example_sla_dag' retrieved from /Users/jobandtalent/opt/anaconda3/envs/e2s-env/lib/python3.9/site-packages/airflow/example_dags/example_sla_dag.py
+[2024-11-21T17:39:53.401+0100] {logging_mixin.py:190} INFO - [2024-11-21T17:39:53.400+0100] {dag.py:3239} INFO - Sync 1 DAGs
+[2024-11-21T17:39:53.838+0100] {logging_mixin.py:190} INFO - [2024-11-21T17:39:53.832+0100] {dag.py:4180} INFO - Setting next_dagrun for example_sla_dag to 2024-11-21 16:36:00+00:00, run_after=2024-11-21 16:38:00+00:00
+[2024-11-21T17:39:53.963+0100] {processor.py:208} INFO - Processing /Users/jobandtalent/opt/anaconda3/envs/e2s-env/lib/python3.9/site-packages/airflow/example_dags/example_sla_dag.py took 0.749 seconds
+[2024-11-21T17:42:13.689+0100] {processor.py:186} INFO - Started process (PID=3278) to work on /Users/jobandtalent/opt/anaconda3/envs/e2s-env/lib/python3.9/site-packages/airflow/example_dags/example_sla_dag.py
+[2024-11-21T17:42:13.694+0100] {processor.py:914} INFO - Processing file /Users/jobandtalent/opt/anaconda3/envs/e2s-env/lib/python3.9/site-packages/airflow/example_dags/example_sla_dag.py for tasks to queue
+[2024-11-21T17:42:13.695+0100] {logging_mixin.py:190} INFO - [2024-11-21T17:42:13.695+0100] {dagbag.py:588} INFO - Filling up the DagBag from /Users/jobandtalent/opt/anaconda3/envs/e2s-env/lib/python3.9/site-packages/airflow/example_dags/example_sla_dag.py
+[2024-11-21T17:42:13.740+0100] {processor.py:925} INFO - DAG(s) 'example_sla_dag' retrieved from /Users/jobandtalent/opt/anaconda3/envs/e2s-env/lib/python3.9/site-packages/airflow/example_dags/example_sla_dag.py
+[2024-11-21T17:42:13.807+0100] {logging_mixin.py:190} INFO - [2024-11-21T17:42:13.807+0100] {dag.py:3239} INFO - Sync 1 DAGs
+[2024-11-21T17:42:13.822+0100] {logging_mixin.py:190} INFO - [2024-11-21T17:42:13.822+0100] {dag.py:4180} INFO - Setting next_dagrun for example_sla_dag to 2024-11-21 16:40:00+00:00, run_after=2024-11-21 16:42:00+00:00
+[2024-11-21T17:42:13.837+0100] {processor.py:208} INFO - Processing /Users/jobandtalent/opt/anaconda3/envs/e2s-env/lib/python3.9/site-packages/airflow/example_dags/example_sla_dag.py took 0.151 seconds
+[2024-11-21T17:44:45.639+0100] {processor.py:186} INFO - Started process (PID=3641) to work on /Users/jobandtalent/opt/anaconda3/envs/e2s-env/lib/python3.9/site-packages/airflow/example_dags/example_sla_dag.py
+[2024-11-21T17:44:45.641+0100] {processor.py:914} INFO - Processing file /Users/jobandtalent/opt/anaconda3/envs/e2s-env/lib/python3.9/site-packages/airflow/example_dags/example_sla_dag.py for tasks to queue
+[2024-11-21T17:44:45.642+0100] {logging_mixin.py:190} INFO - [2024-11-21T17:44:45.642+0100] {dagbag.py:588} INFO - Filling up the DagBag from /Users/jobandtalent/opt/anaconda3/envs/e2s-env/lib/python3.9/site-packages/airflow/example_dags/example_sla_dag.py
+[2024-11-21T17:44:45.739+0100] {processor.py:925} INFO - DAG(s) 'example_sla_dag' retrieved from /Users/jobandtalent/opt/anaconda3/envs/e2s-env/lib/python3.9/site-packages/airflow/example_dags/example_sla_dag.py
+[2024-11-21T17:44:45.815+0100] {logging_mixin.py:190} INFO - [2024-11-21T17:44:45.814+0100] {dag.py:3239} INFO - Sync 1 DAGs
+[2024-11-21T17:44:45.831+0100] {logging_mixin.py:190} INFO - [2024-11-21T17:44:45.831+0100] {dag.py:4180} INFO - Setting next_dagrun for example_sla_dag to 2024-11-21 16:42:00+00:00, run_after=2024-11-21 16:44:00+00:00
+[2024-11-21T17:44:45.845+0100] {processor.py:208} INFO - Processing /Users/jobandtalent/opt/anaconda3/envs/e2s-env/lib/python3.9/site-packages/airflow/example_dags/example_sla_dag.py took 0.219 seconds
