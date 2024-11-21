@@ -69,3 +69,31 @@
 [2024-11-21T17:55:10.015+0100] {logging_mixin.py:190} INFO - [2024-11-21T17:55:10.015+0100] {dag.py:3239} INFO - Sync 1 DAGs
 [2024-11-21T17:55:10.021+0100] {logging_mixin.py:190} INFO - [2024-11-21T17:55:10.021+0100] {dag.py:4180} INFO - Setting next_dagrun for example_setup_teardown to None, run_after=None
 [2024-11-21T17:55:10.034+0100] {processor.py:208} INFO - Processing /Users/jobandtalent/opt/anaconda3/envs/e2s-env/lib/python3.9/site-packages/airflow/example_dags/example_setup_teardown.py took 0.100 seconds
+[2024-11-21T17:57:31.985+0100] {processor.py:186} INFO - Started process (PID=6078) to work on /Users/jobandtalent/opt/anaconda3/envs/e2s-env/lib/python3.9/site-packages/airflow/example_dags/example_setup_teardown.py
+[2024-11-21T17:57:31.987+0100] {processor.py:914} INFO - Processing file /Users/jobandtalent/opt/anaconda3/envs/e2s-env/lib/python3.9/site-packages/airflow/example_dags/example_setup_teardown.py for tasks to queue
+[2024-11-21T17:57:31.988+0100] {logging_mixin.py:190} INFO - [2024-11-21T17:57:31.988+0100] {dagbag.py:588} INFO - Filling up the DagBag from /Users/jobandtalent/opt/anaconda3/envs/e2s-env/lib/python3.9/site-packages/airflow/example_dags/example_setup_teardown.py
+[2024-11-21T17:57:31.997+0100] {processor.py:925} INFO - DAG(s) 'example_setup_teardown' retrieved from /Users/jobandtalent/opt/anaconda3/envs/e2s-env/lib/python3.9/site-packages/airflow/example_dags/example_setup_teardown.py
+[2024-11-21T17:57:32.062+0100] {logging_mixin.py:190} INFO - [2024-11-21T17:57:32.062+0100] {dag.py:3239} INFO - Sync 1 DAGs
+[2024-11-21T17:57:32.070+0100] {logging_mixin.py:190} INFO - [2024-11-21T17:57:32.070+0100] {dag.py:4180} INFO - Setting next_dagrun for example_setup_teardown to None, run_after=None
+[2024-11-21T17:57:32.084+0100] {processor.py:208} INFO - Processing /Users/jobandtalent/opt/anaconda3/envs/e2s-env/lib/python3.9/site-packages/airflow/example_dags/example_setup_teardown.py took 0.111 seconds
+[2024-11-21T17:59:56.681+0100] {processor.py:186} INFO - Started process (PID=6494) to work on /Users/jobandtalent/opt/anaconda3/envs/e2s-env/lib/python3.9/site-packages/airflow/example_dags/example_setup_teardown.py
+[2024-11-21T17:59:56.684+0100] {processor.py:914} INFO - Processing file /Users/jobandtalent/opt/anaconda3/envs/e2s-env/lib/python3.9/site-packages/airflow/example_dags/example_setup_teardown.py for tasks to queue
+[2024-11-21T17:59:56.685+0100] {logging_mixin.py:190} INFO - [2024-11-21T17:59:56.685+0100] {dagbag.py:588} INFO - Filling up the DagBag from /Users/jobandtalent/opt/anaconda3/envs/e2s-env/lib/python3.9/site-packages/airflow/example_dags/example_setup_teardown.py
+[2024-11-21T17:59:56.694+0100] {processor.py:925} INFO - DAG(s) 'example_setup_teardown' retrieved from /Users/jobandtalent/opt/anaconda3/envs/e2s-env/lib/python3.9/site-packages/airflow/example_dags/example_setup_teardown.py
+[2024-11-21T17:59:56.757+0100] {logging_mixin.py:190} INFO - [2024-11-21T17:59:56.757+0100] {dag.py:3239} INFO - Sync 1 DAGs
+[2024-11-21T17:59:56.763+0100] {logging_mixin.py:190} INFO - [2024-11-21T17:59:56.763+0100] {dag.py:4180} INFO - Setting next_dagrun for example_setup_teardown to None, run_after=None
+[2024-11-21T17:59:56.775+0100] {processor.py:208} INFO - Processing /Users/jobandtalent/opt/anaconda3/envs/e2s-env/lib/python3.9/site-packages/airflow/example_dags/example_setup_teardown.py took 0.105 seconds
+[2024-11-21T18:02:24.056+0100] {processor.py:186} INFO - Started process (PID=6896) to work on /Users/jobandtalent/opt/anaconda3/envs/e2s-env/lib/python3.9/site-packages/airflow/example_dags/example_setup_teardown.py
+[2024-11-21T18:02:24.059+0100] {processor.py:914} INFO - Processing file /Users/jobandtalent/opt/anaconda3/envs/e2s-env/lib/python3.9/site-packages/airflow/example_dags/example_setup_teardown.py for tasks to queue
+[2024-11-21T18:02:24.060+0100] {logging_mixin.py:190} INFO - [2024-11-21T18:02:24.059+0100] {dagbag.py:588} INFO - Filling up the DagBag from /Users/jobandtalent/opt/anaconda3/envs/e2s-env/lib/python3.9/site-packages/airflow/example_dags/example_setup_teardown.py
+[2024-11-21T18:02:24.069+0100] {processor.py:925} INFO - DAG(s) 'example_setup_teardown' retrieved from /Users/jobandtalent/opt/anaconda3/envs/e2s-env/lib/python3.9/site-packages/airflow/example_dags/example_setup_teardown.py
+[2024-11-21T18:02:24.138+0100] {logging_mixin.py:190} INFO - [2024-11-21T18:02:24.137+0100] {dag.py:3239} INFO - Sync 1 DAGs
+[2024-11-21T18:02:24.146+0100] {logging_mixin.py:190} INFO - [2024-11-21T18:02:24.145+0100] {dag.py:4180} INFO - Setting next_dagrun for example_setup_teardown to None, run_after=None
+[2024-11-21T18:02:24.181+0100] {processor.py:208} INFO - Processing /Users/jobandtalent/opt/anaconda3/envs/e2s-env/lib/python3.9/site-packages/airflow/example_dags/example_setup_teardown.py took 0.134 seconds
+[2024-11-21T18:04:47.837+0100] {processor.py:186} INFO - Started process (PID=7237) to work on /Users/jobandtalent/opt/anaconda3/envs/e2s-env/lib/python3.9/site-packages/airflow/example_dags/example_setup_teardown.py
+[2024-11-21T18:04:47.841+0100] {processor.py:914} INFO - Processing file /Users/jobandtalent/opt/anaconda3/envs/e2s-env/lib/python3.9/site-packages/airflow/example_dags/example_setup_teardown.py for tasks to queue
+[2024-11-21T18:04:47.842+0100] {logging_mixin.py:190} INFO - [2024-11-21T18:04:47.842+0100] {dagbag.py:588} INFO - Filling up the DagBag from /Users/jobandtalent/opt/anaconda3/envs/e2s-env/lib/python3.9/site-packages/airflow/example_dags/example_setup_teardown.py
+[2024-11-21T18:04:47.851+0100] {processor.py:925} INFO - DAG(s) 'example_setup_teardown' retrieved from /Users/jobandtalent/opt/anaconda3/envs/e2s-env/lib/python3.9/site-packages/airflow/example_dags/example_setup_teardown.py
+[2024-11-21T18:04:47.912+0100] {logging_mixin.py:190} INFO - [2024-11-21T18:04:47.912+0100] {dag.py:3239} INFO - Sync 1 DAGs
+[2024-11-21T18:04:47.919+0100] {logging_mixin.py:190} INFO - [2024-11-21T18:04:47.919+0100] {dag.py:4180} INFO - Setting next_dagrun for example_setup_teardown to None, run_after=None
+[2024-11-21T18:04:47.931+0100] {processor.py:208} INFO - Processing /Users/jobandtalent/opt/anaconda3/envs/e2s-env/lib/python3.9/site-packages/airflow/example_dags/example_setup_teardown.py took 0.103 seconds

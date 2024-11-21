@@ -62,3 +62,11 @@
 [2024-11-21T17:55:49.222+0100] {logging_mixin.py:190} INFO - [2024-11-21T17:55:49.222+0100] {dag.py:4180} INFO - Setting next_dagrun for example_external_task_marker_child to None, run_after=None
 [2024-11-21T17:55:49.223+0100] {logging_mixin.py:190} INFO - [2024-11-21T17:55:49.223+0100] {dag.py:4180} INFO - Setting next_dagrun for example_external_task_marker_parent to None, run_after=None
 [2024-11-21T17:55:49.232+0100] {processor.py:208} INFO - Processing /Users/jobandtalent/opt/anaconda3/envs/e2s-env/lib/python3.9/site-packages/airflow/example_dags/example_external_task_marker_dag.py took 0.926 seconds
+[2024-11-21T18:00:38.043+0100] {processor.py:186} INFO - Started process (PID=6592) to work on /Users/jobandtalent/opt/anaconda3/envs/e2s-env/lib/python3.9/site-packages/airflow/example_dags/example_external_task_marker_dag.py
+[2024-11-21T18:00:38.045+0100] {processor.py:914} INFO - Processing file /Users/jobandtalent/opt/anaconda3/envs/e2s-env/lib/python3.9/site-packages/airflow/example_dags/example_external_task_marker_dag.py for tasks to queue
+[2024-11-21T18:00:38.046+0100] {logging_mixin.py:190} INFO - [2024-11-21T18:00:38.045+0100] {dagbag.py:588} INFO - Filling up the DagBag from /Users/jobandtalent/opt/anaconda3/envs/e2s-env/lib/python3.9/site-packages/airflow/example_dags/example_external_task_marker_dag.py
+[2024-11-21T18:00:38.058+0100] {processor.py:925} INFO - DAG(s) 'example_external_task_marker_parent', 'example_external_task_marker_child' retrieved from /Users/jobandtalent/opt/anaconda3/envs/e2s-env/lib/python3.9/site-packages/airflow/example_dags/example_external_task_marker_dag.py
+[2024-11-21T18:00:38.911+0100] {logging_mixin.py:190} INFO - [2024-11-21T18:00:38.911+0100] {dag.py:3239} INFO - Sync 2 DAGs
+[2024-11-21T18:00:38.917+0100] {logging_mixin.py:190} INFO - [2024-11-21T18:00:38.917+0100] {dag.py:4180} INFO - Setting next_dagrun for example_external_task_marker_child to None, run_after=None
+[2024-11-21T18:00:38.920+0100] {logging_mixin.py:190} INFO - [2024-11-21T18:00:38.920+0100] {dag.py:4180} INFO - Setting next_dagrun for example_external_task_marker_parent to None, run_after=None
+[2024-11-21T18:00:38.932+0100] {processor.py:208} INFO - Processing /Users/jobandtalent/opt/anaconda3/envs/e2s-env/lib/python3.9/site-packages/airflow/example_dags/example_external_task_marker_dag.py took 0.897 seconds

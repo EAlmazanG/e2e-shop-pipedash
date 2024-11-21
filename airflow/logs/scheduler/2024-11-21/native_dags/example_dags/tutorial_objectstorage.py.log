@@ -76,3 +76,24 @@
 [2024-11-21T17:56:41.399+0100] {logging_mixin.py:190} INFO - [2024-11-21T17:56:41.398+0100] {dag.py:3239} INFO - Sync 1 DAGs
 [2024-11-21T17:56:41.410+0100] {logging_mixin.py:190} INFO - [2024-11-21T17:56:41.410+0100] {dag.py:4180} INFO - Setting next_dagrun for tutorial_objectstorage to None, run_after=None
 [2024-11-21T17:56:41.429+0100] {processor.py:208} INFO - Processing /Users/jobandtalent/opt/anaconda3/envs/e2s-env/lib/python3.9/site-packages/airflow/example_dags/tutorial_objectstorage.py took 0.215 seconds
+[2024-11-21T17:59:04.717+0100] {processor.py:186} INFO - Started process (PID=6372) to work on /Users/jobandtalent/opt/anaconda3/envs/e2s-env/lib/python3.9/site-packages/airflow/example_dags/tutorial_objectstorage.py
+[2024-11-21T17:59:04.719+0100] {processor.py:914} INFO - Processing file /Users/jobandtalent/opt/anaconda3/envs/e2s-env/lib/python3.9/site-packages/airflow/example_dags/tutorial_objectstorage.py for tasks to queue
+[2024-11-21T17:59:04.720+0100] {logging_mixin.py:190} INFO - [2024-11-21T17:59:04.719+0100] {dagbag.py:588} INFO - Filling up the DagBag from /Users/jobandtalent/opt/anaconda3/envs/e2s-env/lib/python3.9/site-packages/airflow/example_dags/tutorial_objectstorage.py
+[2024-11-21T17:59:04.756+0100] {processor.py:925} INFO - DAG(s) 'tutorial_objectstorage' retrieved from /Users/jobandtalent/opt/anaconda3/envs/e2s-env/lib/python3.9/site-packages/airflow/example_dags/tutorial_objectstorage.py
+[2024-11-21T17:59:04.818+0100] {logging_mixin.py:190} INFO - [2024-11-21T17:59:04.818+0100] {dag.py:3239} INFO - Sync 1 DAGs
+[2024-11-21T17:59:04.825+0100] {logging_mixin.py:190} INFO - [2024-11-21T17:59:04.824+0100] {dag.py:4180} INFO - Setting next_dagrun for tutorial_objectstorage to None, run_after=None
+[2024-11-21T17:59:04.836+0100] {processor.py:208} INFO - Processing /Users/jobandtalent/opt/anaconda3/envs/e2s-env/lib/python3.9/site-packages/airflow/example_dags/tutorial_objectstorage.py took 0.126 seconds
+[2024-11-21T18:01:30.457+0100] {processor.py:186} INFO - Started process (PID=6748) to work on /Users/jobandtalent/opt/anaconda3/envs/e2s-env/lib/python3.9/site-packages/airflow/example_dags/tutorial_objectstorage.py
+[2024-11-21T18:01:30.459+0100] {processor.py:914} INFO - Processing file /Users/jobandtalent/opt/anaconda3/envs/e2s-env/lib/python3.9/site-packages/airflow/example_dags/tutorial_objectstorage.py for tasks to queue
+[2024-11-21T18:01:30.460+0100] {logging_mixin.py:190} INFO - [2024-11-21T18:01:30.460+0100] {dagbag.py:588} INFO - Filling up the DagBag from /Users/jobandtalent/opt/anaconda3/envs/e2s-env/lib/python3.9/site-packages/airflow/example_dags/tutorial_objectstorage.py
+[2024-11-21T18:01:30.491+0100] {processor.py:925} INFO - DAG(s) 'tutorial_objectstorage' retrieved from /Users/jobandtalent/opt/anaconda3/envs/e2s-env/lib/python3.9/site-packages/airflow/example_dags/tutorial_objectstorage.py
+[2024-11-21T18:01:30.548+0100] {logging_mixin.py:190} INFO - [2024-11-21T18:01:30.548+0100] {dag.py:3239} INFO - Sync 1 DAGs
+[2024-11-21T18:01:30.554+0100] {logging_mixin.py:190} INFO - [2024-11-21T18:01:30.554+0100] {dag.py:4180} INFO - Setting next_dagrun for tutorial_objectstorage to None, run_after=None
+[2024-11-21T18:01:30.566+0100] {processor.py:208} INFO - Processing /Users/jobandtalent/opt/anaconda3/envs/e2s-env/lib/python3.9/site-packages/airflow/example_dags/tutorial_objectstorage.py took 0.118 seconds
+[2024-11-21T18:03:55.130+0100] {processor.py:186} INFO - Started process (PID=7111) to work on /Users/jobandtalent/opt/anaconda3/envs/e2s-env/lib/python3.9/site-packages/airflow/example_dags/tutorial_objectstorage.py
+[2024-11-21T18:03:55.136+0100] {processor.py:914} INFO - Processing file /Users/jobandtalent/opt/anaconda3/envs/e2s-env/lib/python3.9/site-packages/airflow/example_dags/tutorial_objectstorage.py for tasks to queue
+[2024-11-21T18:03:55.137+0100] {logging_mixin.py:190} INFO - [2024-11-21T18:03:55.137+0100] {dagbag.py:588} INFO - Filling up the DagBag from /Users/jobandtalent/opt/anaconda3/envs/e2s-env/lib/python3.9/site-packages/airflow/example_dags/tutorial_objectstorage.py
+[2024-11-21T18:03:55.191+0100] {processor.py:925} INFO - DAG(s) 'tutorial_objectstorage' retrieved from /Users/jobandtalent/opt/anaconda3/envs/e2s-env/lib/python3.9/site-packages/airflow/example_dags/tutorial_objectstorage.py
+[2024-11-21T18:03:55.461+0100] {logging_mixin.py:190} INFO - [2024-11-21T18:03:55.460+0100] {dag.py:3239} INFO - Sync 1 DAGs
+[2024-11-21T18:03:55.472+0100] {logging_mixin.py:190} INFO - [2024-11-21T18:03:55.472+0100] {dag.py:4180} INFO - Setting next_dagrun for tutorial_objectstorage to None, run_after=None
+[2024-11-21T18:03:55.498+0100] {processor.py:208} INFO - Processing /Users/jobandtalent/opt/anaconda3/envs/e2s-env/lib/python3.9/site-packages/airflow/example_dags/tutorial_objectstorage.py took 0.379 seconds

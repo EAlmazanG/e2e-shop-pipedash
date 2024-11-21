@@ -78,3 +78,35 @@
 [2024-11-21T17:55:19.189+0100] {logging_mixin.py:190} INFO - [2024-11-21T17:55:19.188+0100] {dag.py:3239} INFO - Sync 1 DAGs
 [2024-11-21T17:55:19.195+0100] {logging_mixin.py:190} INFO - [2024-11-21T17:55:19.195+0100] {dag.py:4180} INFO - Setting next_dagrun for example_python_operator to None, run_after=None
 [2024-11-21T17:55:19.209+0100] {processor.py:208} INFO - Processing /Users/jobandtalent/opt/anaconda3/envs/e2s-env/lib/python3.9/site-packages/airflow/example_dags/example_python_operator.py took 0.116 seconds
+[2024-11-21T17:57:42.421+0100] {processor.py:186} INFO - Started process (PID=6157) to work on /Users/jobandtalent/opt/anaconda3/envs/e2s-env/lib/python3.9/site-packages/airflow/example_dags/example_python_operator.py
+[2024-11-21T17:57:42.423+0100] {processor.py:914} INFO - Processing file /Users/jobandtalent/opt/anaconda3/envs/e2s-env/lib/python3.9/site-packages/airflow/example_dags/example_python_operator.py for tasks to queue
+[2024-11-21T17:57:42.424+0100] {logging_mixin.py:190} INFO - [2024-11-21T17:57:42.424+0100] {dagbag.py:588} INFO - Filling up the DagBag from /Users/jobandtalent/opt/anaconda3/envs/e2s-env/lib/python3.9/site-packages/airflow/example_dags/example_python_operator.py
+[2024-11-21T17:57:42.448+0100] {logging_mixin.py:190} INFO - [2024-11-21T17:57:42.448+0100] {example_python_operator.py:93} WARNING - The virtalenv_python example task requires virtualenv, please install it.
+[2024-11-21T17:57:42.451+0100] {processor.py:925} INFO - DAG(s) 'example_python_operator' retrieved from /Users/jobandtalent/opt/anaconda3/envs/e2s-env/lib/python3.9/site-packages/airflow/example_dags/example_python_operator.py
+[2024-11-21T17:57:42.514+0100] {logging_mixin.py:190} INFO - [2024-11-21T17:57:42.514+0100] {dag.py:3239} INFO - Sync 1 DAGs
+[2024-11-21T17:57:42.521+0100] {logging_mixin.py:190} INFO - [2024-11-21T17:57:42.521+0100] {dag.py:4180} INFO - Setting next_dagrun for example_python_operator to None, run_after=None
+[2024-11-21T17:57:42.541+0100] {processor.py:208} INFO - Processing /Users/jobandtalent/opt/anaconda3/envs/e2s-env/lib/python3.9/site-packages/airflow/example_dags/example_python_operator.py took 0.130 seconds
+[2024-11-21T18:00:07.942+0100] {processor.py:186} INFO - Started process (PID=6518) to work on /Users/jobandtalent/opt/anaconda3/envs/e2s-env/lib/python3.9/site-packages/airflow/example_dags/example_python_operator.py
+[2024-11-21T18:00:07.943+0100] {processor.py:914} INFO - Processing file /Users/jobandtalent/opt/anaconda3/envs/e2s-env/lib/python3.9/site-packages/airflow/example_dags/example_python_operator.py for tasks to queue
+[2024-11-21T18:00:07.944+0100] {logging_mixin.py:190} INFO - [2024-11-21T18:00:07.944+0100] {dagbag.py:588} INFO - Filling up the DagBag from /Users/jobandtalent/opt/anaconda3/envs/e2s-env/lib/python3.9/site-packages/airflow/example_dags/example_python_operator.py
+[2024-11-21T18:00:07.963+0100] {logging_mixin.py:190} INFO - [2024-11-21T18:00:07.963+0100] {example_python_operator.py:93} WARNING - The virtalenv_python example task requires virtualenv, please install it.
+[2024-11-21T18:00:07.966+0100] {processor.py:925} INFO - DAG(s) 'example_python_operator' retrieved from /Users/jobandtalent/opt/anaconda3/envs/e2s-env/lib/python3.9/site-packages/airflow/example_dags/example_python_operator.py
+[2024-11-21T18:00:08.028+0100] {logging_mixin.py:190} INFO - [2024-11-21T18:00:08.028+0100] {dag.py:3239} INFO - Sync 1 DAGs
+[2024-11-21T18:00:08.035+0100] {logging_mixin.py:190} INFO - [2024-11-21T18:00:08.035+0100] {dag.py:4180} INFO - Setting next_dagrun for example_python_operator to None, run_after=None
+[2024-11-21T18:00:08.049+0100] {processor.py:208} INFO - Processing /Users/jobandtalent/opt/anaconda3/envs/e2s-env/lib/python3.9/site-packages/airflow/example_dags/example_python_operator.py took 0.115 seconds
+[2024-11-21T18:02:34.260+0100] {processor.py:186} INFO - Started process (PID=6918) to work on /Users/jobandtalent/opt/anaconda3/envs/e2s-env/lib/python3.9/site-packages/airflow/example_dags/example_python_operator.py
+[2024-11-21T18:02:34.262+0100] {processor.py:914} INFO - Processing file /Users/jobandtalent/opt/anaconda3/envs/e2s-env/lib/python3.9/site-packages/airflow/example_dags/example_python_operator.py for tasks to queue
+[2024-11-21T18:02:34.263+0100] {logging_mixin.py:190} INFO - [2024-11-21T18:02:34.263+0100] {dagbag.py:588} INFO - Filling up the DagBag from /Users/jobandtalent/opt/anaconda3/envs/e2s-env/lib/python3.9/site-packages/airflow/example_dags/example_python_operator.py
+[2024-11-21T18:02:34.281+0100] {logging_mixin.py:190} INFO - [2024-11-21T18:02:34.281+0100] {example_python_operator.py:93} WARNING - The virtalenv_python example task requires virtualenv, please install it.
+[2024-11-21T18:02:34.284+0100] {processor.py:925} INFO - DAG(s) 'example_python_operator' retrieved from /Users/jobandtalent/opt/anaconda3/envs/e2s-env/lib/python3.9/site-packages/airflow/example_dags/example_python_operator.py
+[2024-11-21T18:02:34.344+0100] {logging_mixin.py:190} INFO - [2024-11-21T18:02:34.344+0100] {dag.py:3239} INFO - Sync 1 DAGs
+[2024-11-21T18:02:34.351+0100] {logging_mixin.py:190} INFO - [2024-11-21T18:02:34.351+0100] {dag.py:4180} INFO - Setting next_dagrun for example_python_operator to None, run_after=None
+[2024-11-21T18:02:34.364+0100] {processor.py:208} INFO - Processing /Users/jobandtalent/opt/anaconda3/envs/e2s-env/lib/python3.9/site-packages/airflow/example_dags/example_python_operator.py took 0.112 seconds
+[2024-11-21T18:04:58.446+0100] {processor.py:186} INFO - Started process (PID=7258) to work on /Users/jobandtalent/opt/anaconda3/envs/e2s-env/lib/python3.9/site-packages/airflow/example_dags/example_python_operator.py
+[2024-11-21T18:04:58.448+0100] {processor.py:914} INFO - Processing file /Users/jobandtalent/opt/anaconda3/envs/e2s-env/lib/python3.9/site-packages/airflow/example_dags/example_python_operator.py for tasks to queue
+[2024-11-21T18:04:58.448+0100] {logging_mixin.py:190} INFO - [2024-11-21T18:04:58.448+0100] {dagbag.py:588} INFO - Filling up the DagBag from /Users/jobandtalent/opt/anaconda3/envs/e2s-env/lib/python3.9/site-packages/airflow/example_dags/example_python_operator.py
+[2024-11-21T18:04:58.467+0100] {logging_mixin.py:190} INFO - [2024-11-21T18:04:58.467+0100] {example_python_operator.py:93} WARNING - The virtalenv_python example task requires virtualenv, please install it.
+[2024-11-21T18:04:58.471+0100] {processor.py:925} INFO - DAG(s) 'example_python_operator' retrieved from /Users/jobandtalent/opt/anaconda3/envs/e2s-env/lib/python3.9/site-packages/airflow/example_dags/example_python_operator.py
+[2024-11-21T18:04:58.531+0100] {logging_mixin.py:190} INFO - [2024-11-21T18:04:58.531+0100] {dag.py:3239} INFO - Sync 1 DAGs
+[2024-11-21T18:04:58.538+0100] {logging_mixin.py:190} INFO - [2024-11-21T18:04:58.537+0100] {dag.py:4180} INFO - Setting next_dagrun for example_python_operator to None, run_after=None
+[2024-11-21T18:04:58.550+0100] {processor.py:208} INFO - Processing /Users/jobandtalent/opt/anaconda3/envs/e2s-env/lib/python3.9/site-packages/airflow/example_dags/example_python_operator.py took 0.113 seconds

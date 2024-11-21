@@ -41,3 +41,10 @@
 [2024-11-21T17:56:04.058+0100] {logging_mixin.py:190} INFO - [2024-11-21T17:56:04.058+0100] {dag.py:3239} INFO - Sync 1 DAGs
 [2024-11-21T17:56:04.068+0100] {logging_mixin.py:190} INFO - [2024-11-21T17:56:04.068+0100] {dag.py:4180} INFO - Setting next_dagrun for example_weekday_branch_operator to 2024-11-20 00:00:00+00:00, run_after=2024-11-21 00:00:00+00:00
 [2024-11-21T17:56:04.079+0100] {processor.py:208} INFO - Processing /Users/jobandtalent/opt/anaconda3/envs/e2s-env/lib/python3.9/site-packages/airflow/example_dags/example_branch_day_of_week_operator.py took 0.103 seconds
+[2024-11-21T18:00:54.236+0100] {processor.py:186} INFO - Started process (PID=6644) to work on /Users/jobandtalent/opt/anaconda3/envs/e2s-env/lib/python3.9/site-packages/airflow/example_dags/example_branch_day_of_week_operator.py
+[2024-11-21T18:00:54.239+0100] {processor.py:914} INFO - Processing file /Users/jobandtalent/opt/anaconda3/envs/e2s-env/lib/python3.9/site-packages/airflow/example_dags/example_branch_day_of_week_operator.py for tasks to queue
+[2024-11-21T18:00:54.240+0100] {logging_mixin.py:190} INFO - [2024-11-21T18:00:54.240+0100] {dagbag.py:588} INFO - Filling up the DagBag from /Users/jobandtalent/opt/anaconda3/envs/e2s-env/lib/python3.9/site-packages/airflow/example_dags/example_branch_day_of_week_operator.py
+[2024-11-21T18:00:54.249+0100] {processor.py:925} INFO - DAG(s) 'example_weekday_branch_operator' retrieved from /Users/jobandtalent/opt/anaconda3/envs/e2s-env/lib/python3.9/site-packages/airflow/example_dags/example_branch_day_of_week_operator.py
+[2024-11-21T18:00:54.311+0100] {logging_mixin.py:190} INFO - [2024-11-21T18:00:54.311+0100] {dag.py:3239} INFO - Sync 1 DAGs
+[2024-11-21T18:00:54.323+0100] {logging_mixin.py:190} INFO - [2024-11-21T18:00:54.323+0100] {dag.py:4180} INFO - Setting next_dagrun for example_weekday_branch_operator to 2024-11-20 00:00:00+00:00, run_after=2024-11-21 00:00:00+00:00
+[2024-11-21T18:00:54.334+0100] {processor.py:208} INFO - Processing /Users/jobandtalent/opt/anaconda3/envs/e2s-env/lib/python3.9/site-packages/airflow/example_dags/example_branch_day_of_week_operator.py took 0.109 seconds
