@@ -10,3 +10,4 @@ airflow/airflow-webserver.pid
 airflow/airflow.db
 airflow/airflow.db
 /airflow
+airflow/airflow.db
