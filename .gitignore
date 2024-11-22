@@ -3,3 +3,4 @@
 openai_setup.py
 __pycache__/openai_setup.cpython-39.pyc
 aws_setup.py
+/airflow/logs/
