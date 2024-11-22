@@ -4,3 +4,9 @@ openai_setup.py
 __pycache__/openai_setup.cpython-39.pyc
 aws_setup.py
 /airflow/logs/
+airflow/webserver_config.py
+airflow/airflow.db
+airflow/airflow-webserver.pid
+airflow/airflow.db
+airflow/airflow.db
+/airflow
