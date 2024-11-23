@@ -1,6 +1,6 @@
 from airflow import DAG
 from airflow.utils.dates import days_ago
-from airflow.providers.amazon.aws.operators.aws_lambda import AwsLambdaInvokeFunctionOperator
+from airflow.providers.amazon.aws.operators.lambda_function import LambdaInvokeFunctionOperator
 
 with DAG(
     dag_id="test_aws_lambda",
@@ -10,10 +10,10 @@ with DAG(
     tags=["aws", "lambda"],
 ) as dag:
 
-    lambda_task = AwsLambdaInvokeFunctionOperator(
+    lambda_task = LambdaInvokeFunctionOperator(
         task_id="test_lambda_function",
         function_name="lambda-e2eShop-upload-product-descriptions",
-        payload={},
+        payload="{}",
         log_type="Tail",
         aws_conn_id="aws_default",
     )
