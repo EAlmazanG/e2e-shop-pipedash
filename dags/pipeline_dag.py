@@ -50,7 +50,7 @@ with DAG(
     schedule_interval=None,
     start_date=days_ago(1),
     catchup=False,
-    tags=["aws", "lambda", "glue"],
+    tags=["aws", "lambda", "glue", "snowflake", "e2e-shop"],
     dagrun_timeout=timedelta(hours=2),
 ) as dag:
 
