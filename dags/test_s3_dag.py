@@ -13,6 +13,7 @@ with DAG(
     schedule_interval=None,
     start_date=days_ago(1),
     catchup=False,
+    tags = ["aws","test","e2e-shop"]
 ) as dag:
     list_s3_files = S3ListOperator(
         task_id="list_s3_buckets",

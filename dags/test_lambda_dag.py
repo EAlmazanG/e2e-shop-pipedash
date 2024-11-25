@@ -7,7 +7,7 @@ with DAG(
     schedule_interval=None,
     start_date=days_ago(1),
     catchup=False,
-    tags=["aws", "lambda"],
+    tags=["aws", "lambda","test","e2e-shop"],
 ) as dag:
 
     lambda_task = LambdaInvokeFunctionOperator(
