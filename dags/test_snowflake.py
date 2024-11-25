@@ -123,3 +123,12 @@ with DAG(
             sql=query,
         )
         generate_etl_tasks.append(task)
+
+    # Set dependencies
+    for import_task in import_tasks:
+        for generate_int_task in generate_int_tables_tasks:
+            import_task >> generate_int_task
+
+    for generate_int_task in generate_int_tables_tasks:
+        for generate_etl_task in generate_etl_tasks:
+            generate_int_task >> generate_etl_task
