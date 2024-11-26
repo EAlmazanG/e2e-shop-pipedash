@@ -275,8 +275,6 @@ GENERATE_ETLS = {
     """
 }
 
-
-
 # DAG Definition
 with DAG(
     dag_id="test_snowflake",
@@ -286,54 +284,53 @@ with DAG(
     start_date=days_ago(1),
     tags=["snowflake","test","e2e-shop"],
 ) as dag:
-
-    import_tasks = []
-    for table, query in IMPORT_TABLES.items():
-        task = SnowflakeOperator(
+    
+    import_tasks = {
+        table: SnowflakeOperator(
             task_id=f"import_{table}",
             snowflake_conn_id="snowflake_default",
             sql=query,
         )
-        import_tasks.append(task)
+        for table, query in IMPORT_TABLES.items()
+    }
 
-    generate_int_tables_tasks = []
-    for table, query in GENERATE_INT_TABLES.items():
-        task = SnowflakeOperator(
+    generate_int_tables_tasks = {
+        table: SnowflakeOperator(
             task_id=f"generate_{table}",
             snowflake_conn_id="snowflake_default",
             sql=query,
         )
-        generate_int_tables_tasks.append(task)
+        for table, query in GENERATE_INT_TABLES.items()
+    }
 
-    generate_etl_tasks = []
-    for table, query in GENERATE_ETLS.items():
-        task = SnowflakeOperator(
+    generate_etl_tasks = {
+        table: SnowflakeOperator(
             task_id=f"generate_{table}",
             snowflake_conn_id="snowflake_default",
             sql=query,
         )
-        generate_etl_tasks.append(task)
+        for table, query in GENERATE_ETLS.items()
+    }
 
     # Set dependencies
+    import_tasks["dim_items"] >> generate_int_tables_tasks["int_items"]
+    import_tasks["dim_item_family"] >> generate_int_tables_tasks["int_items"]
+    import_tasks["fact_transactions"] >> generate_int_tables_tasks["int_items"]
 
-    import_tasks[2] >> generate_int_tables_tasks[0]
-    import_tasks[3] >> generate_int_tables_tasks[0]
-    import_tasks[5] >> generate_int_tables_tasks[0]
+    import_tasks["dim_date"] >> generate_int_tables_tasks["int_transactions"]
+    import_tasks["dim_items"] >> generate_int_tables_tasks["int_transactions"]
+    import_tasks["dim_item_family"] >> generate_int_tables_tasks["int_transactions"]
+    import_tasks["dim_location"] >> generate_int_tables_tasks["int_transactions"]
+    import_tasks["fact_transactions"] >> generate_int_tables_tasks["int_transactions"]
 
-    import_tasks[1] >> generate_int_tables_tasks[1]
-    import_tasks[2] >> generate_int_tables_tasks[1]
-    import_tasks[3] >> generate_int_tables_tasks[1]
-    import_tasks[4] >> generate_int_tables_tasks[1]
-    import_tasks[5] >> generate_int_tables_tasks[1]
+    import_tasks["dim_location"] >> generate_int_tables_tasks["int_invoices"]
+    import_tasks["dim_date"] >> generate_int_tables_tasks["int_invoices"]
+    generate_int_tables_tasks["int_transactions"] >> generate_int_tables_tasks["int_invoices"]
 
-    import_tasks[4] >> generate_int_tables_tasks[2]
-    generate_int_tables_tasks[1] >> generate_int_tables_tasks[2]
+    import_tasks["dim_location"] >> generate_int_tables_tasks["int_customers"]
+    generate_int_tables_tasks["int_transactions"] >> generate_int_tables_tasks["int_customers"]
 
-    import_tasks[1] >> generate_int_tables_tasks[3]
-    import_tasks[4] >> generate_int_tables_tasks[3]
-    generate_int_tables_tasks[1] >> generate_int_tables_tasks[3]
-
-    generate_int_tables_tasks[0] >> generate_etl_tasks[0]
-    generate_int_tables_tasks[1] >> generate_etl_tasks[1]
-    generate_int_tables_tasks[2] >> generate_etl_tasks[3]
-    generate_int_tables_tasks[3] >> generate_etl_tasks[3]
+    generate_int_tables_tasks["int_items"] >> generate_etl_tasks["etl_items"]
+    generate_int_tables_tasks["int_transactions"] >> generate_etl_tasks["etl_transactions"]
+    generate_int_tables_tasks["int_invoices"] >> generate_etl_tasks["etl_invoices"]
+    generate_int_tables_tasks["int_customers"] >> generate_etl_tasks["etl_customers"]
