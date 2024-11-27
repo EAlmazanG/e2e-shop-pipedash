@@ -12,3 +12,5 @@ airflow/airflow.db
 /airflow
 airflow/airflow.db
 *.pyc
+airflow/logs/scheduler/latest
+airflow/airflow.db
