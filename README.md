@@ -17,11 +17,21 @@
 Many businesses need a streamlined, scalable way to monitor and analyze their data. This project aims to solve this problem by building a pipeline that captures essential metrics, organizes data for efficient querying, and presents the results in a dashboard for quick insights. This approach provides business leaders with a clear, actionable view of their performance, inventory, and customer behavior.
 
 ## Technologies
-- **AWS Lambda**: Automates data ingestion from API or source files to S3 (serving as a datalake).
-- **Amazon S3**: Storage for raw data files.
-- **Apache Airflow**: Manages ETL processes, transforming from AWS lambda to Snowflake.
+- **AWS Lambda**: Automates data ingestion from source files to S3 (serving as a datalake).
+- **AWS Glue**: Automates data transformation with Spark.
+- **AWS Athena**: Enables SQL checks of the processed S3 data.
+- **AWS S3**: Datalake of the project.
+- **Apache Airflow**: Orchestrates the full process.
 - **Snowflake**: Data warehouse for structured storage and querying.
 - **Tableau**: Dashboard for visualizing the final metrics and insights.
+
+## Project Phases summary
+1. **Data Analysis and Data Modelling**: Inspection, design and modelling of the complete databases and ETL flow.
+2. **Data Ingestion**: Ingestion from sources to S3 datalake.
+3. **Data Transformation**: Process and clean the raw data with Glue and Spark.
+4. **Data Storage and Management**: Store the clean tables in the Snowflake data warehouse.
+5. **Data Orchestration**: Controls the end to end ETL process.
+6. **Data Visualization**: Visualize the data in Tableau.
 
 ## Folder Structure
 
@@ -65,7 +75,7 @@ e2eShop-pipeDash/
 └── .gitignore                           # Excludes unnecessary files from version control
 ```
 
-## Project Workflow
+## Workflow
 
 ![Complete flow](img/complete_flow.png)
 
@@ -88,6 +98,8 @@ Snowflake serves as the data warehouse, storing clean, transformed data. The tab
 ### Data Orchestration
 Airflow orchestrates the complete ETL process. The Airflow DAG (`pipeline_dag.py`) controls the ingestion with lambda, transformation with Glue and the connections with the data warehouse in Snowflake. In the last step, calculates the additional etls.
 
+For Airflow installetion, check:
+Be sure that you have install AWS and Snowflake dependencies to 
 ![Airflow DAG](img/airflow_dag.png)
 
 ### Data Visualization
