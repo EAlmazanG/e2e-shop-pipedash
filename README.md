@@ -70,7 +70,12 @@ e2eShop-pipeDash/
 
 ## Project Workflow
 
-![Preview of the dashboard](img/dag.png)
+![Preview of the dashboard](img/complete_flow.png)
+
+### Data Analysis and Data Modelling
+First, the sources are reviewed using a notebook to perform an initial analysis of the available data, generate synthesised data to improve the final result given the limitations of the databases, and perform an initial design in Python of the different stages of the process. Once reviewed, we proceed to the design of the data model, choosing a basic structure of dimension and fact tables.
+
+![Preview of the dashboard](img/data_model.png)
 
 ### Data Ingestion
 AWS Lambda ingests data from the eCommerce source (e.g., transactions, inventory data) and uploads it to an Amazon S3 bucket, serving as a datalake.
@@ -81,15 +86,17 @@ Once the data is in S3 a Glue job processes it within and save the transformed t
 ### Data Storage and Management
 Snowflake serves as the data warehouse, storing clean, transformed data. The tables are structured to support quick querying and analysis. Also, four aggregated etls has been calculated through SQL to improve data consumptions for analytical purpouses.
 
-### Data Visualization
-Tableau connects to Snowflake to visualize the final dataset:
-- **Sales**: Overview of the main sales metrics and status.
-- **Customers**: Overview of customers.
-- **Products**: Detailed evolution of each of the product categories.
-
-![Preview of the dashboard](img/dashboard.gif)
+![Preview of the dashboard](img/snowflake_example.png)
 
 ### Data Orchestration
 Airflow orchestrates the complete ETL process. The Airflow DAG (`pipeline_dag.py`) controls the ingestion with lambda, transformation with Glue and the connections with the data warehouse in Snowflake. In the last step, calculates the additional etls.
 
-![Preview of the dashboard](img/airflow.png)
+![Preview of the dashboard](img/airflow_dag.png)
+
+### Data Visualization
+Tableau connects to Snowflake to visualize the final dataset:
+- **Sales**: Overview of the main sales metrics and status.
+- **Customers**: Overview of customers metrics.
+- **Products**: Detailed evolution of each of the product categories.
+
+![Preview of the dashboard](img/e2e-shop-pipedash.pptx)
