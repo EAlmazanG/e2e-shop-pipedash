@@ -1,11 +1,12 @@
 # e2eShop-pipeDash
+![Preview of the dashboard]
 
 <!--
-![Preview of the dashboard]()
+![Preview of the dashboard](img/dashboard.gif)
 
 <br></br>
 <p align="center">
-    <a href= target="_blank">
+    <a href="https://public.tableau.com/app/profile/eduardo.almazan.galisteo/viz/e2e-shop-pipedash/Customers" target="_blank">
         <img src="https://img.shields.io/badge/Try%20the%20Live%20Demo!-4CAF50?style=for-the-badge&logo=streamlit&logoColor=white" alt="Live Demo">
     </a>
 </p>
@@ -13,15 +14,15 @@
 -->
 
 ## Overview
-**e2eShop-pipeDash** is a complete end-to-end pipeline and dashboard project designed to provide insights into an eCommerce business. It gathers, processes, and visualizes key metrics such as sales, inventory levels, and customer behavior, enabling data-driven decisions for eCommerce optimization. This project demonstrates integration with AWS (for data ingestion and storage in S3), Airflow (for orchestration), Snowflake (as a data warehouse), and Tableau for final data visualization.
+**e2eShop-pipeDash** is a complete end-to-end pipeline and dashboard project designed to provide insights into an commerce business. It gathers, processes, and visualizes key metrics such as sales and customer behavior, enabling data-driven decisions for optimization. This project demonstrates integration with AWS (for data ingestion and storage in S3), Airflow (for orchestration), Snowflake (as a data warehouse), and Tableau for final data visualization.
 
 ## Problem Statement
-Many eCommerce businesses need a streamlined, scalable way to monitor and analyze their data. This project aims to solve this problem by building a pipeline that captures essential metrics, organizes data for efficient querying, and presents the results in a dashboard for quick insights. This approach provides business leaders with a clear, actionable view of their performance, inventory, and customer behavior.
+Many businesses need a streamlined, scalable way to monitor and analyze their data. This project aims to solve this problem by building a pipeline that captures essential metrics, organizes data for efficient querying, and presents the results in a dashboard for quick insights. This approach provides business leaders with a clear, actionable view of their performance, inventory, and customer behavior.
 
 ## Technologies
 - **AWS Lambda**: Automates data ingestion from API or source files to S3 (serving as a datalake).
 - **Amazon S3**: Storage for raw data files.
-- **Apache Airflow**: Manages ETL processes, transforming data in Snowflake.
+- **Apache Airflow**: Manages ETL processes, transforming from AWS lambda to Snowflake.
 - **Snowflake**: Data warehouse for structured storage and querying.
 - **Tableau**: Dashboard for visualizing the final metrics and insights.
 
@@ -30,46 +31,65 @@ Many eCommerce businesses need a streamlined, scalable way to monitor and analyz
 ```bash
 e2eShop-pipeDash/
 │
-├── data/                       # Sample data for local testing
-│   ├── sample_data.csv         # Example file for simulating data ingestion
+├── airflow/                             # Airflow instalation (add it to your local repo)
+├── aws/                                 # Input data of the project
+│   ├── glue_transform.py                # Spark files for Glue job
+│   └── lambda_ingest.py                 # Lambda function for ingestions
 │
-├── dags/                       # Airflow DAGs for ETL process
-│   ├── ecommerce_etl.py        # DAG defining the ingestion, transformation, and loading process
+├── dags/                                # Airflow DAGs for ETL process
+│   ├── pipeline_dag.py                  # Main DAG defining the ingestion, transformation, and loading process
+│   ├── test_glue_dag.py                 # DAG for glue test
+│   ├── test_lambda_dag.py               # DAG for lambda test
+│   ├── test_s3_dag.py                   # DAG for S3 connection test
+│   └── test_snowflake.py                # DAG for Snowflake connection test
 │
-├── src/                        # Core scripts for ingestion and transformation
-│   ├── lambda_ingest.py        # AWS Lambda script for data ingestion
-│   ├── transformations.py      # Functions for data cleaning and transformation in Airflow
-│   ├── snowflake_queries.sql   # SQL scripts for data processing in Snowflake
+├── dashboards/                          # Tableau dashboard and images
+│   └── e2e-shop-pipedash.twbx           # Tableau dashboard file
 │
-├── config/                     # Configuration files for services
-│   ├── config_s3.py            # S3 configuration for data storage
-│   ├── config_snowflake.py     # Snowflake connection settings
-│   ├── config_lambda.json      # Lambda configuration details
-│   ├── airflow.cfg             # Airflow configuration
+├── data/                                # Input data of the project
+│   ├── main_product_description.csv     # Description of each of the items groups
+│   └── retail.csv                       # Transactions raw file
 │
-├── dashboard/                  # Tableau dashboard files
-│   └── ecommerce_dashboard.twbx # Tableau file for visualizing metrics
+├── glue_env/                            # Python environment for glue
+├── notebooks/                           # Notebooks for prototyping and data exploration
+│   └── prepare_data.ipynb               # Analyse the raw data and the necessary transformations
 │
-├── notebooks/                  # Notebooks for prototyping and data exploration
-│   ├── data_exploration.ipynb  # Notebook for initial data exploration
-│   ├── etl_prototype.ipynb     # Prototype of ETL process and testing
+├── snowflake/                           # Input data of the project
+│   ├── aws_import.sql                   # SQL for aws import in snowflake
+│   └── calculate_etls.sql               # SQL for calculate the aggregated etls
 │
-├── README.md                   # Documentation and project overview
-├── requirements.txt            # Dependencies
-├── environment.yml             # Conda environment configuration (optional)
-└── .gitignore                  # Excludes unnecessary files from version control
+├── img/                                 # Images and GIFs for README
+├── README.md                            # Documentation and project overview
+├── requirements.txt                     # Dependencies
+├── environment.yml                      # Conda environment configuration (optional)
+├── LICENSE             
+├── aws_setup.py                         # AWS config (add it to your local repo)
+├── openai_setup.py                      # openAI config (add it to your local repo)
+└── .gitignore                           # Excludes unnecessary files from version control
 ```
 
 ## Project Workflow
 
+![Preview of the dashboard](img/dag.png)
+
 ### Data Ingestion
-AWS Lambda ingests data from the eCommerce source (e.g., transactions, inventory data) and uploads it to an Amazon S3 bucket, serving as a datalake. This initial ingestion is configured to run automatically based on scheduled intervals or data availability.
+AWS Lambda ingests data from the eCommerce source (e.g., transactions, inventory data) and uploads it to an Amazon S3 bucket, serving as a datalake.
 
 ### Data Transformation
-Once the data is in S3, Airflow orchestrates the ETL process. The Airflow DAG (`ecommerce_etl.py`) reads data from S3, processes it within Snowflake using SQL transformations, and organizes it into staging and final tables, ready for analysis and reporting.
+Once the data is in S3 a Glue job processes it within and save the transformed tables in S3. For testing, a Glue Crawler scans the S3 bucket to be able to check the data with AWS Athena.
 
 ### Data Storage and Management
-Snowflake serves as the data warehouse, storing clean, transformed data. The tables are structured to support quick querying and analysis, with partitions and indexes optimized for eCommerce metrics such as sales trends, inventory management, and customer segmentation.
+Snowflake serves as the data warehouse, storing clean, transformed data. The tables are structured to support quick querying and analysis. Also, four aggregated etls has been calculated through SQL to improve data consumptions for analytical purpouses.
 
 ### Data Visualization
-Tableau connects to Snowflake to visualize the final dataset. 
+Tableau connects to Snowflake to visualize the final dataset:
+- **Sales**: Overview of the main sales metrics and status.
+- **Customers**: Overview of customers.
+- **Products**: Detailed evolution of each of the product categories.
+
+![Preview of the dashboard](img/dashboard.gif)
+
+### Data Orchestration
+Airflow orchestrates the complete ETL process. The Airflow DAG (`pipeline_dag.py`) controls the ingestion with lambda, transformation with Glue and the connections with the data warehouse in Snowflake. In the last step, calculates the additional etls.
+
+![Preview of the dashboard](img/airflow.png)
