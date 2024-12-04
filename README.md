@@ -84,6 +84,25 @@ First, the sources are reviewed using a notebook to perform an initial analysis 
 
 ![Data model](img/data_model.png)
 
+#### Using the GPT API
+
+The **GPT API** is integrated into improve the data available for better insights in the visualization phase.The API is used in the notebook prepare_data.ipynb to generate the extra file main_product_descriptions.csv
+
+#### Setup Instructions
+1. **API Key**: To enable the GPT functionality, you'll need an API key from OpenAI. If you haven’t done so already, sign up for an API key at [OpenAI's website](https://platform.openai.com/signup).
+   
+2. **Configuration File**: In the project’s root directory, create or locate the `openai_setup.py` file. Replace the placeholders with your OpenAI credentials as shown below:
+
+```python
+   conf = {
+       'organization': 'your_organization_key_here',
+       'project': 'your_project_key_here',
+       'key': 'your_openai_api_key_here'
+   }
+```
+
+**Important**: Ensure that openai_setup.py is included in your .gitignore file to keep your API key secure and prevent accidental exposure in public repositories.
+
 ### Data Ingestion
 AWS Lambda ingests data from the eCommerce source (e.g., transactions, inventory data) and uploads it to an Amazon S3 bucket, serving as a datalake.
 
@@ -98,8 +117,10 @@ Snowflake serves as the data warehouse, storing clean, transformed data. The tab
 ### Data Orchestration
 Airflow orchestrates the complete ETL process. The Airflow DAG (`pipeline_dag.py`) controls the ingestion with lambda, transformation with Glue and the connections with the data warehouse in Snowflake. In the last step, calculates the additional etls.
 
-For Airflow installetion, check:
-Be sure that you have install AWS and Snowflake dependencies to 
+For Airflow installetion, check: https://github.com/apache/airflow
+> **‼️👀🚨 IMPORTANT 🚨👀‼️**: Be sure that you have install AWS and Snowflake dependencies.
+
+
 ![Airflow DAG](img/airflow_dag.png)
 
 ### Data Visualization
@@ -107,6 +128,14 @@ Tableau connects to Snowflake to visualize the final dataset:
 - **Sales**: Overview of the main sales metrics and status.
 - **Customers**: Overview of customers metrics.
 - **Products**: Detailed evolution of each of the product categories.
+
+<br></br>
+<p align="center">
+    <a href="https://public.tableau.com/app/profile/eduardo.almazan.galisteo/viz/e2e-shop-pipedash/Customers" target="_blank">
+        <img src="https://img.shields.io/badge/Try%20the%20Live%20Demo!-4CAF50?style=for-the-badge&logo=streamlit&logoColor=white" alt="Live Demo">
+    </a>
+</p>
+<br></br>
 
 ![Sales sample](img/sales_sample.png)
 
