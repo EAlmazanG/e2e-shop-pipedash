@@ -115,9 +115,8 @@ Snowflake serves as the data warehouse, storing clean, transformed data. The tab
 ![Snowflake example](img/snowflake_example.png)
 
 ### Data Orchestration
-Airflow orchestrates the complete ETL process. The Airflow DAG (`pipeline_dag.py`) controls the ingestion with lambda, transformation with Glue and the connections with the data warehouse in Snowflake. In the last step, calculates the additional etls.
+Airflow orchestrates the complete ETL process. The Airflow DAG (`pipeline_dag.py`) controls the ingestion with lambda, transformation with Glue and the connections with the data warehouse in Snowflake. In the last step, calculates the additional etls. For Airflow installation check: https://github.com/apache/airflow
 
-For Airflow installetion, check: https://github.com/apache/airflow
 > **‼️👀🚨 IMPORTANT 🚨👀‼️**: Be sure that you have install AWS and Snowflake dependencies.
 
 
@@ -129,6 +128,12 @@ Tableau connects to Snowflake to visualize the final dataset:
 - **Customers**: Overview of customers metrics.
 - **Products**: Detailed evolution of each of the product categories.
 
+![Sales sample](img/sales_sample.png)
+
+![Customers sample](img/customers_sample.png)
+
+![Products sample](img/products_sample.png)
+
 <br></br>
 <p align="center">
     <a href="https://public.tableau.com/app/profile/eduardo.almazan.galisteo/viz/e2e-shop-pipedash/Customers" target="_blank">
@@ -136,9 +141,3 @@ Tableau connects to Snowflake to visualize the final dataset:
     </a>
 </p>
 <br></br>
-
-![Sales sample](img/sales_sample.png)
-
-![Customers sample](img/customers_sample.png)
-
-![Products sample](img/products_sample.png)
